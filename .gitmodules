@@ -1,0 +1,3 @@
+[submodule "setup_apps"]
+	path = setup_apps
+	url = https://github.com/lordmikefin/setup_apps.git
