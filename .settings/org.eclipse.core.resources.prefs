@@ -1,3 +1,12 @@
 eclipse.preferences.version=1
 encoding//setup_apps/__init__.py=UTF-8
 encoding//setup_apps/config.py=UTF-8
+encoding//setup_apps/eclipse.py=UTF-8
+encoding//setup_apps/git.py=UTF-8
+encoding//setup_apps/java.py=UTF-8
+encoding//setup_apps/namedtuples.py=UTF-8
+encoding//setup_apps/npp.py=UTF-8
+encoding//setup_apps/putty.py=UTF-8
+encoding//setup_apps/pydev.py=UTF-8
+encoding//setup_apps/python.py=UTF-8
+encoding//setup_apps/util.py=UTF-8
