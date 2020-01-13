@@ -14,4 +14,5 @@ if __name__ == '__main__':
     setup_apps.config.create_sample()
     setup_apps.config.print_sample()
     setup_apps.config.parse()
+    setup_apps.config.download()
     print('END')
