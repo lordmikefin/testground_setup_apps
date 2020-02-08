@@ -16,4 +16,5 @@ if __name__ == '__main__':
     setup_apps.config.parse()
     setup_apps.config.download()
     setup_apps.config.install()
+    setup_apps.config.configure()
     print('END')
