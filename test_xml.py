@@ -5,10 +5,20 @@ Created on 11 Jan 2020
 '''
 
 import setup_apps
+import app_source_handler
+from setup_apps import util
+
+SOURCE_PATH = util.fix_path(util.home_path() + '/LM_ToyBox/setup_apps')
+SOURCE_FILE = 'app_source.xml'
 
 if __name__ == '__main__':
     print('Init messsage test_xml.py')
     print('setup_apps.revision: ' + str(setup_apps.__revision__))
+
+    # NOTE: Just testing the 'app_source_handler'
+    #update_app_source.source.parse(source_file)
+    app_source_handler.source.parse(util.fix_path(SOURCE_PATH + '/' + SOURCE_FILE))
+
     #setup_apps.config.read_write()
     #setup_apps.config.create_test_xml()
     setup_apps.config.create_sample()
