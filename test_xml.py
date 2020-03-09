@@ -17,12 +17,14 @@ if __name__ == '__main__':
 
     # NOTE: Just testing the 'app_source_handler'
     #update_app_source.source.parse(source_file)
-    app_source_handler.source.parse(util.fix_path(SOURCE_PATH + '/' + SOURCE_FILE))
+    #app_source_handler.source.parse(util.fix_path(SOURCE_PATH + '/' + SOURCE_FILE))
+    #source_file = util.fix_path(SOURCE_PATH + '/' + SOURCE_FILE)
 
     #setup_apps.config.read_write()
     #setup_apps.config.create_test_xml()
     setup_apps.config.create_sample()
     setup_apps.config.print_sample()
+    #setup_apps.config.parse(source_file)
     setup_apps.config.parse()
     setup_apps.config.init()
     setup_apps.config.download()
