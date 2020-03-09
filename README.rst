@@ -12,7 +12,7 @@ Get this project:
 
  git clone git@github.com:lordmikefin/testground_setup_apps.git
  
- cd update_app_source/
+ cd testground_setup_apps/
  
  git submodule init
  git submodule update
