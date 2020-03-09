@@ -1,3 +1,6 @@
 [submodule "setup_apps"]
 	path = setup_apps
 	url = https://github.com/lordmikefin/setup_apps.git
+[submodule "app_source_handler"]
+	path = app_source_handler
+	url = https://github.com/lordmikefin/app_source_handler.git
