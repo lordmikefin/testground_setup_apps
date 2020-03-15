@@ -7,8 +7,8 @@ Created on 11 Jan 2020
 import setup_apps
 #import app_source_handler
 from setup_apps import util
-import json
-import app_source_handler
+#import json
+#import app_source_handler
 
 SOURCE_PATH = util.fix_path(util.home_path() + '/LM_ToyBox/setup_apps')
 SOURCE_FILE = 'app_source.xml'
@@ -29,8 +29,8 @@ if __name__ == '__main__':
     #setup_apps.config.parse(source_file)
     setup_apps.config.parse()
     #print('APPS: ' + json.dumps(app_source_handler.source.APPS, sort_keys=True, indent=2))
-    '''
     setup_apps.config.init()
+    '''
     setup_apps.config.download()
     setup_apps.config.install()
     setup_apps.config.configure()
