@@ -5,7 +5,7 @@ Created on 11 Jan 2020
 '''
 
 import setup_apps
-import app_source_handler
+#import app_source_handler
 from setup_apps import util
 
 SOURCE_PATH = util.fix_path(util.home_path() + '/LM_ToyBox/setup_apps')
