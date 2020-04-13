@@ -6,7 +6,7 @@ Created on 2020-04-13
 
 import setup_apps
 from setup_apps import util
-import typing
+import sys
 #from setup_apps.util import hint_test
 '''
 def hint_test(test: str) -> bool:
@@ -16,6 +16,14 @@ def hint_test(test: str) -> bool:
 if __name__ == '__main__':
     print('Init messsage test_util.py')
     print('setup_apps.revision: ' + str(setup_apps.__revision__))
+
+    print('')
+    print('Test function "python_version"')
+    test = util.python_version()
+    print('Python version: ' + str(test))
+
+    # NOTE: This code is tested only with Python version 3.7
+    assert sys.version_info >= (3, 7)
 
     print('')
     print('Test function "hint_test"')
