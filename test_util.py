@@ -7,6 +7,7 @@ Created on 2020-04-13
 import setup_apps
 from setup_apps import util
 import sys
+import logging
 #from setup_apps.util import hint_test
 '''
 def hint_test(test: str) -> bool:
@@ -139,12 +140,23 @@ def run_command_testing():
     print('Command result: ' + str(test))
 
 
+def logging_testing():
+    # https://docs.python.org/3/library/logging.html
+    # https://docs.python.org/3/howto/logging.html
+    # https://docs.python.org/3/howto/logging.html#configuring-logging-for-a-library
+    # https://www.loggly.com/ultimate-guide/python-logging-basics/
+    util.logging_test()
+    logging.info('INFO log from test_util')
+    logging.error('ERROR log from test_util')
+
+
 if __name__ == '__main__':
     print('Init messsage test_util.py')
     print('setup_apps.revision: ' + str(setup_apps.__revision__))
 
-    init_testing()
-    run_command_testing()
+    #init_testing()
+    #run_command_testing()
+    logging_testing()
 
     print('')
     print('')
