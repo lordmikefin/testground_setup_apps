@@ -16,10 +16,30 @@ def hint_test(test: str) -> bool:
 
 
 logging.basicConfig(level=logging.INFO)
+#logging.basicConfig(level=logging.ERROR)
 #logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 
 #logging.getLogger().addHandler(logging.NullHandler())
 #logging.getLogger('setup_apps').addHandler(logging.NullHandler())
+#logging.getLogger('root').addHandler(logging.NullHandler())
+
+#logger_root = logging.getLogger('root')
+logger_root = logging.getLogger()
+ch_root = logging.StreamHandler()
+#ch_root.setLevel(logging.INFO)
+ch_root.setLevel(logging.ERROR)
+formatter_root = logging.Formatter(' - %(name)s - %(levelname)s - %(message)s')
+ch_root.setFormatter(formatter_root)
+logger_root.addHandler(ch_root)
+
+
+logger_setup_apps = logging.getLogger('setup_apps')
+ch = logging.StreamHandler()
+ch.setLevel(logging.DEBUG)
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+ch.setFormatter(formatter)
+logger_setup_apps.addHandler(ch)
+
 
 
 def init_testing():
@@ -189,6 +209,9 @@ def logging_testing():
     # NOTE: Can not configure logger within functions ???
     logging_disable()
     logging_info()
+    print('logging logger_setup_apps')
+    logger_setup_apps.info('INFO log from logger_setup_apps')
+    logger_setup_apps.error('ERROR log from logger_setup_apps')
 
 
 if __name__ == '__main__':
