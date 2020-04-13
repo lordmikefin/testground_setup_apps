@@ -140,27 +140,37 @@ def run_command_testing():
     print('Command result: ' + str(test))
 
 
+def logging_call():
+    print('local logging')
+    logging.info('INFO log from test_util')
+    logging.error('ERROR log from test_util')
+
+    print('logging_test()')
+    util.logging_test()
+
+def logging_disable():
+    print('')
+    print('Init')
+    logging_call()
+    print('')
+    print('Disable "root" logger')
+    # NOTE: looks like 'root' logger can not be disabled ?!
+    #logging.getLogger('root').addHandler(logging.NullHandler())
+    logging.getLogger().addHandler(logging.NullHandler())
+    logging_call()
+    print('')
+    print('Disable "setup_apps" logger')
+    logging.getLogger('setup_apps').addHandler(logging.NullHandler())
+    logging_call()
+    # NOTE: All errors are logged always in the 'root' ?!
+
 def logging_testing():
     # https://docs.python.org/3/library/logging.html
     # https://docs.python.org/3/howto/logging.html
     # https://docs.python.org/3/howto/logging.html#configuring-logging-for-a-library
     # https://www.loggly.com/ultimate-guide/python-logging-basics/
 
-    logging.info('INFO log from test_util')
-    logging.error('ERROR log from test_util')
-
-    print('logging_test()')
-    util.logging_test()
-    print('Disable "root" logger')
-    # NOTE: looks like 'root' logger can not be disabled ?!
-    logging.getLogger('root').addHandler(logging.NullHandler())
-    print('logging_test()')
-    util.logging_test()
-    print('Disable "setup_apps" logger')
-    logging.getLogger('setup_apps').addHandler(logging.NullHandler())
-    print('logging_test()')
-    util.logging_test()
-    # NOTE: All errors are logged always in the 'root' ?!
+    logging_disable()
 
 
 if __name__ == '__main__':
