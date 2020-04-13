@@ -24,7 +24,10 @@ logging.basicConfig(
     #format='',
     datefmt='%d.%m.%Y %H:%M:%S',
     stream=sys.stdout,
-    level=logging.INFO)
+    # Parent logger must have INFO level or child logger will not log get INFO level messges
+    level=logging.INFO
+    #level=logging.ERROR
+    )
 
 
 #logging.getLogger().addHandler(logging.NullHandler())
@@ -35,9 +38,9 @@ logging.basicConfig(
 logger_root = logging.getLogger()
 #ch_root = logging.StreamHandler()
 ch_root = logging.StreamHandler(stream=sys.stdout)
-ch_root = logging.FileHandler('logfile_root.log')
-ch_root.setLevel(logging.INFO)
-#ch_root.setLevel(logging.ERROR)
+#ch_root = logging.FileHandler('logfile_root.log')
+#ch_root.setLevel(logging.INFO)
+ch_root.setLevel(logging.ERROR)
 formatter_root = logging.Formatter('ROOT - %(name)s - %(levelname)s - %(message)s')
 ch_root.setFormatter(formatter_root)
 logger_root.addHandler(ch_root)
@@ -48,7 +51,7 @@ logger_root.propagate = False
 logger_setup_apps = logging.getLogger('setup_apps')
 #ch = logging.StreamHandler()
 ch = logging.StreamHandler(stream=sys.stdout)
-ch = logging.FileHandler('logfile_setup_apps.log')
+#ch = logging.FileHandler('logfile_setup_apps.log')
 #ch.setLevel(logging.DEBUG)
 ch.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
