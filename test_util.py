@@ -18,6 +18,11 @@ if __name__ == '__main__':
     print('setup_apps.revision: ' + str(setup_apps.__revision__))
 
     print('')
+    print('Test function "python_version_str"')
+    test = util.python_version_str()
+    print('Python version: ' + str(test))
+
+    print('')
     print('Test function "python_version"')
     test = util.python_version()
     print('Python version: ' + str(test))
