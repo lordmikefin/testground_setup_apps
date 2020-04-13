@@ -56,11 +56,19 @@ if __name__ == '__main__':
     print('Test function "run_command"')
     test = util.run_command('echo "TEST"')
     print('Command result: ' + str(test))
-    print('TODO: Why subprocess can not find internal command?!')
+    print('')
+    print('NOTE: Shell internal command is not available')
+
+    print('')
+    print('NOTE: without shell "echo" command does not exist')
+    print('')
+    print('Test function "run_command"')
+    test = util.run_command('echo "TEST"', shell=True)
+    print('Command result: ' + str(test))
 
     print('')
     print('Test function "run_command"')
-    test = util.run_command('foo')
+    test = util.run_command('foo', shell=True)
     print('Command result: ' + str(test))
 
     print('')
