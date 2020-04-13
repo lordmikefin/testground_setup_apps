@@ -37,7 +37,30 @@ if __name__ == '__main__':
 
     print('')
     print('Test function "run_command"')
+    command = '"python.exe"'
+    command = command + ' --version'
+    #test = util.run_command('echo "TEST"')
+    test = util.run_command(command)
+    print('Command result: ' + str(test))
+
+    print('')
+    print('Test function "run_command"')
+    #command = '"' + str(PATH_APP_PY38) + '\\python.exe"'
+    command = '"' + 'C:\\Program Files\\Python38' + '\\python.exe"'
+    command = command + ' --version'
+    #test = util.run_command('echo "TEST"')
+    test = util.run_command(command)
+    print('Command result: ' + str(test))
+
+    print('')
+    print('Test function "run_command"')
     test = util.run_command('echo "TEST"')
+    print('Command result: ' + str(test))
+    print('TODO: Why subprocess can not find internal command?!')
+
+    print('')
+    print('Test function "run_command"')
+    test = util.run_command('foo')
     print('Command result: ' + str(test))
 
     print('')
