@@ -15,6 +15,13 @@ def hint_test(test: str) -> bool:
 '''
 
 
+logging.basicConfig(level=logging.INFO)
+#logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
+
+#logging.getLogger().addHandler(logging.NullHandler())
+#logging.getLogger('setup_apps').addHandler(logging.NullHandler())
+
+
 def init_testing():
     print('')
     print('Test function "python_version_str"')
@@ -164,13 +171,24 @@ def logging_disable():
     logging_call()
     # NOTE: All errors are logged always in the 'root' ?!
 
+def logging_info():
+    print('')
+    print('Basic logging level INFO')
+    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
+    print('')
+    print('Init')
+    logging_call()
+
 def logging_testing():
     # https://docs.python.org/3/library/logging.html
     # https://docs.python.org/3/howto/logging.html
     # https://docs.python.org/3/howto/logging.html#configuring-logging-for-a-library
     # https://www.loggly.com/ultimate-guide/python-logging-basics/
 
+    # NOTE: Can not configure logger within functions ???
     logging_disable()
+    logging_info()
 
 
 if __name__ == '__main__':
