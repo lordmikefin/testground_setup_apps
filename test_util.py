@@ -37,8 +37,9 @@ logging.basicConfig(
 #logger_root = logging.getLogger('root')
 logger_root = logging.getLogger()
 #ch_root = logging.StreamHandler()
-ch_root = logging.StreamHandler(stream=sys.stdout)
+#ch_root = logging.StreamHandler(stream=sys.stdout)
 #ch_root = logging.FileHandler('logfile_root.log')
+ch_root = logging.StreamHandler(stream=sys.stderr)
 #ch_root.setLevel(logging.INFO)
 ch_root.setLevel(logging.ERROR)
 formatter_root = logging.Formatter('ROOT - %(name)s - %(levelname)s - %(message)s')
@@ -57,10 +58,14 @@ ch.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 ch.setFormatter(formatter)
 logger_setup_apps.addHandler(ch)
+ch_err = logging.StreamHandler(stream=sys.stderr)
+ch_err.setLevel(logging.ERROR)
+ch_err.setFormatter(formatter)
+logger_setup_apps.addHandler(ch_err)
 # Do not propagate the error up to parent
-logger_setup_apps.propagate = False
+#logger_setup_apps.propagate = False
 
-logger_setup_apps.addHandler(logging.NullHandler())
+#logger_setup_apps.addHandler(logging.NullHandler())
 
 
 def init_testing():
@@ -190,8 +195,10 @@ def run_command_testing():
 
 def logging_call():
     print('local logging')
-    logging.info('INFO log from test_util')
-    logging.error('ERROR log from test_util')
+    #logging.info('INFO log from test_util')
+    #logging.error('ERROR log from test_util')
+    logger_root.info('INFO log from test_util')
+    logger_root.error('ERROR log from test_util')
 
     print('logging_test()')
     util.logging_test()
