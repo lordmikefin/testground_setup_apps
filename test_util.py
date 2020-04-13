@@ -41,6 +41,8 @@ ch_root.setLevel(logging.INFO)
 formatter_root = logging.Formatter('ROOT - %(name)s - %(levelname)s - %(message)s')
 ch_root.setFormatter(formatter_root)
 logger_root.addHandler(ch_root)
+# Do not propagate the error up to parent
+logger_root.propagate = False
 
 
 logger_setup_apps = logging.getLogger('setup_apps')
@@ -52,6 +54,8 @@ ch.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 ch.setFormatter(formatter)
 logger_setup_apps.addHandler(ch)
+# Do not propagate the error up to parent
+logger_setup_apps.propagate = False
 
 logger_setup_apps.addHandler(logging.NullHandler())
 
@@ -220,6 +224,7 @@ def logging_testing():
     # https://docs.python.org/3/howto/logging.html#configuring-logging-for-a-library
     # https://www.loggly.com/ultimate-guide/python-logging-basics/
     # https://docs.python.org/3/library/logging.handlers.html#logging.StreamHandler
+    # https://www.toptal.com/python/in-depth-python-logging
 
     # NOTE: Can not configure logger within functions ???
     logging_disable()
