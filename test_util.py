@@ -6,10 +6,39 @@ Created on 2020-04-13
 
 import setup_apps
 from setup_apps import util
+import typing
+#from setup_apps.util import hint_test
+'''
+def hint_test(test: str) -> bool:
+    return isinstance(test, str)
+'''
 
 if __name__ == '__main__':
     print('Init messsage test_util.py')
     print('setup_apps.revision: ' + str(setup_apps.__revision__))
+
+    print('')
+    print('Test function "hint_test"')
+    # TODO: why __annotations__ is marked as error in Eclipse?!
+    print('annotations: ' + str(util.hint_test.__annotations__))
+    #print('' + str(typing.get_type_hints(util.hint_test)))
+    #print('' + str(hint_test.__annotations__))
+    print('Call: ' + "hint_test('test')")
+    test = util.hint_test('test')
+    print('hint_test: ' + str(test))
+    print('Call: ' + "hint_test(1)")
+    test = util.hint_test(1)
+    print('hint_test: ' + str(test))
+
+    print('')
+    print('Test function "hint_test_complex"')
+    print('annotations: ' + str(util.hint_test_complex.__annotations__))
+    print('Call: ' + "hint_test_complex('test')")
+    test = util.hint_test_complex('test')
+    print('hint_test_complex: ' + str(test))
+    print('Call: ' + "hint_test_complex(1)")
+    test = util.hint_test_complex(1)
+    print('hint_test_complex: ' + str(test))
 
     print('')
     print('Test function "is_os_windows"')
