@@ -124,5 +124,15 @@ if __name__ == '__main__':
     print('Command result: ' + str(test))
 
     print('')
+    print('Test function "run_command_alt_1"')
+    test = util.run_command_alt_1(['echo', 'TEST 1', '&&', 'echo', 'TEST 2'])
+    print('Command result: ' + str(test))
+
+    print('')
+    print('Test function "run_command_alt_1"')
+    test = util.run_command_alt_1(['echo', 'TEST 1', '&&', 'echo', 'TEST 2'], shell=True)
+    print('Command result: ' + str(test))
+
+    print('')
     print('')
     print('END')
