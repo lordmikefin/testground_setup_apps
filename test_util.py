@@ -101,5 +101,15 @@ if __name__ == '__main__':
     print('Command result: ' + str(test))
 
     print('')
+    print('Test function "run_command"')
+    test = util.run_command('echo "TEST 1" && echo "TEST 2"', shell=True)
+    print('Command result: ' + str(test))
+
+    print('')
+    print('Test function "run_command"')
+    test = util.run_command(['echo', 'TEST 1', '&&', 'echo', 'TEST 2'], shell=True)
+    print('Command result: ' + str(test))
+
+    print('')
     print('')
     print('END')
