@@ -20,6 +20,8 @@ def hint_test(test: str) -> bool:
 #logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 logging.basicConfig(
     format='%(asctime)s:%(levelname)s:%(name)s:%(message)s',
+    #format=None,
+    #format='',
     datefmt='%d.%m.%Y %H:%M:%S',
     stream=sys.stdout,
     level=logging.INFO)
@@ -33,9 +35,10 @@ logging.basicConfig(
 logger_root = logging.getLogger()
 #ch_root = logging.StreamHandler()
 ch_root = logging.StreamHandler(stream=sys.stdout)
+ch_root = logging.FileHandler('logfile_root.log')
 ch_root.setLevel(logging.INFO)
 #ch_root.setLevel(logging.ERROR)
-formatter_root = logging.Formatter(' - %(name)s - %(levelname)s - %(message)s')
+formatter_root = logging.Formatter('ROOT - %(name)s - %(levelname)s - %(message)s')
 ch_root.setFormatter(formatter_root)
 logger_root.addHandler(ch_root)
 
@@ -43,12 +46,14 @@ logger_root.addHandler(ch_root)
 logger_setup_apps = logging.getLogger('setup_apps')
 #ch = logging.StreamHandler()
 ch = logging.StreamHandler(stream=sys.stdout)
+ch = logging.FileHandler('logfile_setup_apps.log')
 #ch.setLevel(logging.DEBUG)
 ch.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 ch.setFormatter(formatter)
 logger_setup_apps.addHandler(ch)
 
+logger_setup_apps.addHandler(logging.NullHandler())
 
 
 def init_testing():
@@ -214,6 +219,7 @@ def logging_testing():
     # https://docs.python.org/3/howto/logging.html
     # https://docs.python.org/3/howto/logging.html#configuring-logging-for-a-library
     # https://www.loggly.com/ultimate-guide/python-logging-basics/
+    # https://docs.python.org/3/library/logging.handlers.html#logging.StreamHandler
 
     # NOTE: Can not configure logger within functions ???
     logging_disable()
