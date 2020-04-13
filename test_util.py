@@ -15,9 +15,15 @@ def hint_test(test: str) -> bool:
 '''
 
 
-logging.basicConfig(level=logging.INFO)
+#logging.basicConfig(level=logging.INFO)
 #logging.basicConfig(level=logging.ERROR)
 #logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
+logging.basicConfig(
+    format='%(asctime)s:%(levelname)s:%(name)s:%(message)s',
+    datefmt='%d.%m.%Y %H:%M:%S',
+    stream=sys.stdout,
+    level=logging.INFO)
+
 
 #logging.getLogger().addHandler(logging.NullHandler())
 #logging.getLogger('setup_apps').addHandler(logging.NullHandler())
@@ -25,17 +31,20 @@ logging.basicConfig(level=logging.INFO)
 
 #logger_root = logging.getLogger('root')
 logger_root = logging.getLogger()
-ch_root = logging.StreamHandler()
-#ch_root.setLevel(logging.INFO)
-ch_root.setLevel(logging.ERROR)
+#ch_root = logging.StreamHandler()
+ch_root = logging.StreamHandler(stream=sys.stdout)
+ch_root.setLevel(logging.INFO)
+#ch_root.setLevel(logging.ERROR)
 formatter_root = logging.Formatter(' - %(name)s - %(levelname)s - %(message)s')
 ch_root.setFormatter(formatter_root)
 logger_root.addHandler(ch_root)
 
 
 logger_setup_apps = logging.getLogger('setup_apps')
-ch = logging.StreamHandler()
-ch.setLevel(logging.DEBUG)
+#ch = logging.StreamHandler()
+ch = logging.StreamHandler(stream=sys.stdout)
+#ch.setLevel(logging.DEBUG)
+ch.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 ch.setFormatter(formatter)
 logger_setup_apps.addHandler(ch)
