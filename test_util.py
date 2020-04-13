@@ -81,6 +81,11 @@ def run_command_testing():
     test = util.run_command_alt_1(['echo', 'TEST 1', '&&', 'echo', 'TEST 2'], shell=True)
     print('Command result: ' + str(test))
 
+    print('')
+    print('Test function "run_command_alt_1"')
+    test = util.run_command_alt_1(['foo'], shell=True)
+    print('Command result: ' + str(test))
+
 
 if __name__ == '__main__':
     print('Init messsage test_util.py')
