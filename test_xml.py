@@ -55,6 +55,8 @@ if __name__ == '__main__':
 
     logger = create_logger()
     logger.info('Init messsage test_xml.py')
+    logger.error('Error logging test')
+    logger.debug('Debug logging test')
     logger.info('setup_apps.revision: ' + str(setup_apps.__revision__))
 
     # NOTE: Just testing the 'app_source_handler'
