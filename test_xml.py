@@ -12,31 +12,48 @@ from setup_apps import util
 import logging
 import sys
 
-# Default log level.
-logging.basicConfig(level=logging.DEBUG)
+def conf_root_logger():
+    # Default log level.
+    logging.basicConfig(level=logging.DEBUG)
 
-#formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s: %(message)s')
-#formatter = logging.Formatter('%(name)-10s - %(levelname)-4s: %(message)s')
-formatter = logging.Formatter('[%(name)-10s] %(levelname)-4s: %(message)s')
-logger_conf = setup_apps.logger
-hand_stdout = logging.StreamHandler(stream=sys.stdout)
-hand_stdout.setLevel(logging.DEBUG)
-hand_stdout.setFormatter(formatter)
-hand_stderr = logging.StreamHandler(stream=sys.stderr)
-hand_stderr.setLevel(logging.ERROR)
-hand_stderr.setFormatter(formatter)
-logger_conf.addHandler(hand_stdout)
-logger_conf.addHandler(hand_stderr)
+def create_formatter():
+    #formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s: %(message)s')
+    #formatter = logging.Formatter('%(name)-10s - %(levelname)-4s: %(message)s')
+    formatter = logging.Formatter('[%(name)-10s] %(levelname)-4s: %(message)s')
+    return formatter
 
-logger = logging.getLogger('test_xml')
-logger.addHandler(hand_stdout)
-logger.addHandler(hand_stderr)
-logger.propagate = False
+def create_hand_stdout():
+    hand_stdout = logging.StreamHandler(stream=sys.stdout)
+    hand_stdout.setLevel(logging.DEBUG)
+    hand_stdout.setFormatter(create_formatter())
+    return hand_stdout
+
+def create_hand_stderr():
+    hand_stderr = logging.StreamHandler(stream=sys.stderr)
+    hand_stderr.setLevel(logging.ERROR)
+    hand_stderr.setFormatter(create_formatter())
+    return hand_stderr
+
+def conf_setup_apps_logger():
+    logger_conf = setup_apps.logger
+    logger_conf.addHandler(create_hand_stdout())
+    logger_conf.addHandler(create_hand_stderr())
+
+def create_logger():
+    logger = logging.getLogger('test_xml')
+    logger.addHandler(create_hand_stdout())
+    logger.addHandler(create_hand_stderr())
+    logger.propagate = False
+    return logger
 
 SOURCE_PATH = util.fix_path(util.home_path() + '/LM_ToyBox/setup_apps')
 SOURCE_FILE = 'app_source.xml'
 
 if __name__ == '__main__':
+    conf_root_logger()
+    conf_setup_apps_logger()
+
+    logger = create_logger()
     logger.info('Init messsage test_xml.py')
     logger.info('setup_apps.revision: ' + str(setup_apps.__revision__))
 
