@@ -15,59 +15,6 @@ def hint_test(test: str) -> bool:
 '''
 
 
-#logging.basicConfig(level=logging.INFO)
-#logging.basicConfig(level=logging.ERROR)
-#logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
-logging.basicConfig(
-    format='%(asctime)s:%(levelname)s:%(name)s:%(message)s',
-    #format=None,
-    #format='',
-    datefmt='%d.%m.%Y %H:%M:%S',
-    stream=sys.stdout,
-    # Parent logger must have INFO level or child logger will not log get INFO level messges
-    level=logging.INFO
-    #level=logging.ERROR
-    )
-
-
-#logging.getLogger().addHandler(logging.NullHandler())
-#logging.getLogger('setup_apps').addHandler(logging.NullHandler())
-#logging.getLogger('root').addHandler(logging.NullHandler())
-
-#logger_root = logging.getLogger('root')
-logger_root = logging.getLogger()
-#ch_root = logging.StreamHandler()
-#ch_root = logging.StreamHandler(stream=sys.stdout)
-#ch_root = logging.FileHandler('logfile_root.log')
-ch_root = logging.StreamHandler(stream=sys.stderr)
-#ch_root.setLevel(logging.INFO)
-ch_root.setLevel(logging.ERROR)
-formatter_root = logging.Formatter('ROOT - %(name)s - %(levelname)s - %(message)s')
-ch_root.setFormatter(formatter_root)
-logger_root.addHandler(ch_root)
-# Do not propagate the error up to parent
-logger_root.propagate = False
-
-
-logger_setup_apps = logging.getLogger('setup_apps')
-#ch = logging.StreamHandler()
-ch = logging.StreamHandler(stream=sys.stdout)
-#ch = logging.FileHandler('logfile_setup_apps.log')
-#ch.setLevel(logging.DEBUG)
-ch.setLevel(logging.INFO)
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-ch.setFormatter(formatter)
-logger_setup_apps.addHandler(ch)
-ch_err = logging.StreamHandler(stream=sys.stderr)
-ch_err.setLevel(logging.ERROR)
-ch_err.setFormatter(formatter)
-logger_setup_apps.addHandler(ch_err)
-# Do not propagate the error up to parent
-#logger_setup_apps.propagate = False
-
-#logger_setup_apps.addHandler(logging.NullHandler())
-
-
 def init_testing():
     print('')
     print('Test function "python_version_str"')
@@ -193,40 +140,43 @@ def run_command_testing():
     print('Command result: ' + str(test))
 
 
-def logging_call():
-    print('local logging')
-    #logging.info('INFO log from test_util')
-    #logging.error('ERROR log from test_util')
-    logger_root.info('INFO log from test_util')
-    logger_root.error('ERROR log from test_util')
+def setup_root_logging():
+    logging.basicConfig(
+        #format='%(asctime)s:%(levelname)s:%(name)s:%(message)s',
+        #format=None,
+        #format='',
+        #datefmt='%d.%m.%Y %H:%M:%S',
+        #stream=sys.stdout,
+        # Parent logger must have INFO level or child logger will not log get INFO level messges
+        level=logging.INFO
+        #level=logging.ERROR
+        )
 
-    print('logging_test()')
-    util.logging_test()
+def create_logger():
+    logger_test_util = logging.getLogger('test_util')
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    ch = logging.StreamHandler(stream=sys.stdout)
+    #ch = logging.FileHandler('logfile_setup_apps.log')
+    #ch.setLevel(logging.DEBUG)
+    ch.setLevel(logging.INFO)
+    ch.setFormatter(formatter)
+    logger_test_util.addHandler(ch)
+    ch_err = logging.StreamHandler(stream=sys.stderr)
+    ch_err.setLevel(logging.ERROR)
+    ch_err.setFormatter(formatter)
+    logger_test_util.addHandler(ch_err)
+    # Do not propagate the error up to parent
+    logger_test_util.propagate = False
+    return logger_test_util
 
-def logging_disable():
-    print('')
-    print('Init')
-    logging_call()
-    print('')
-    print('Disable "root" logger')
-    # NOTE: looks like 'root' logger can not be disabled ?!
-    #logging.getLogger('root').addHandler(logging.NullHandler())
-    logging.getLogger().addHandler(logging.NullHandler())
-    logging_call()
-    print('')
-    print('Disable "setup_apps" logger')
-    logging.getLogger('setup_apps').addHandler(logging.NullHandler())
-    logging_call()
-    # NOTE: All errors are logged always in the 'root' ?!
-
-def logging_info():
-    print('')
-    print('Basic logging level INFO')
-    logging.basicConfig(level=logging.INFO)
-    logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
-    print('')
-    print('Init')
-    logging_call()
+def config_logger_setup_apps():
+    print('Conf the "setup_apps" at test_util')
+    log = logging.getLogger('setup_apps')
+    formatter = logging.Formatter('[test_util conffed] - %(name)s - %(levelname)s - %(message)s')
+    ch = logging.StreamHandler(stream=sys.stdout)
+    ch.setLevel(logging.INFO)
+    ch.setFormatter(formatter)
+    log.addHandler(ch)
 
 def logging_testing():
     # https://docs.python.org/3/library/logging.html
@@ -236,12 +186,14 @@ def logging_testing():
     # https://docs.python.org/3/library/logging.handlers.html#logging.StreamHandler
     # https://www.toptal.com/python/in-depth-python-logging
 
-    # NOTE: Can not configure logger within functions ???
-    logging_disable()
-    logging_info()
-    print('logging logger_setup_apps')
-    logger_setup_apps.info('INFO log from logger_setup_apps')
-    logger_setup_apps.error('ERROR log from logger_setup_apps')
+    setup_root_logging()
+    logger_test_util = create_logger()
+    logger_test_util.info('INFO log from test_util')
+    logger_test_util.error('ERROR log from test_util')
+    logging.info('INFO log from "root" logging')
+    logging.error('ERROR log from "root" logging')
+    config_logger_setup_apps()
+    util.logging_test()
 
 
 if __name__ == '__main__':
