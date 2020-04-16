@@ -46,10 +46,6 @@ def create_logger():
     logger.propagate = False
     return logger
 
-def conf_urllib3_logger():
-    # NOTE: stop 'urllib3' logger
-    log = logging.getLogger('urllib3')
-    log.propagate = False
 
 SOURCE_PATH = util.fix_path(util.home_path() + '/LM_ToyBox/setup_apps')
 SOURCE_FILE = 'app_source.xml'
@@ -57,7 +53,7 @@ SOURCE_FILE = 'app_source.xml'
 if __name__ == '__main__':
     conf_root_logger()
     conf_setup_apps_logger()
-    conf_urllib3_logger()
+    setup_apps.util.stop_urllib3_logger()
 
     logger = create_logger()
     logger.info('Init messsage test_xml.py')
