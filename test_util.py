@@ -154,7 +154,7 @@ def setup_root_logging():
 
 def create_logger():
     logger_test_util = logging.getLogger('test_util')
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s {%(pathname)s:%(lineno)d}')
     ch = logging.StreamHandler(stream=sys.stdout)
     #ch = logging.FileHandler('logfile_setup_apps.log')
     #ch.setLevel(logging.DEBUG)

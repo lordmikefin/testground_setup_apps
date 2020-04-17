@@ -31,7 +31,10 @@ def create_hand_stdout():
 def create_hand_stderr():
     hand_stderr = logging.StreamHandler(stream=sys.stderr)
     hand_stderr.setLevel(logging.ERROR)
-    hand_stderr.setFormatter(create_formatter())
+    #hand_stderr.setFormatter(create_formatter())
+    f_str = '[%(name)-10s] %(levelname)-4s: %(message)s {%(pathname)s:%(lineno)d}'
+    formatter = logging.Formatter(f_str)
+    hand_stderr.setFormatter(formatter)
     return hand_stderr
 
 def conf_setup_apps_logger():
