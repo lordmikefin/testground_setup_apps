@@ -19,7 +19,10 @@ def conf_root_logger():
 def create_formatter():
     #formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s: %(message)s')
     #formatter = logging.Formatter('%(name)-10s - %(levelname)-4s: %(message)s')
-    formatter = logging.Formatter('[%(name)-10s] %(levelname)-4s: %(message)s')
+    f_str = '[%(name)-10s] %(levelname)-4s: %(message)s'
+    # TODO: parameterize: show file/line
+    f_str += ' [%(pathname)s:%(lineno)d]'
+    formatter = logging.Formatter(f_str)
     return formatter
 
 def create_hand_stdout():
@@ -32,7 +35,7 @@ def create_hand_stderr():
     hand_stderr = logging.StreamHandler(stream=sys.stderr)
     hand_stderr.setLevel(logging.ERROR)
     #hand_stderr.setFormatter(create_formatter())
-    f_str = '[%(name)-10s] %(levelname)-4s: %(message)s {%(pathname)s:%(lineno)d}'
+    f_str = '[%(name)-10s] %(levelname)-4s: %(message)s [%(pathname)s:%(lineno)d]'
     formatter = logging.Formatter(f_str)
     hand_stderr.setFormatter(formatter)
     return hand_stderr
