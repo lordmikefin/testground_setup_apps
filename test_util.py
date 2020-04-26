@@ -66,6 +66,8 @@ def init_testing():
     home_dir = util.home_path()
     print('The user home path: ' + str(home_dir))
 
+def win_only_test():
+    util.pause()
 
 def run_command_testing():
     print('')
@@ -148,7 +150,8 @@ def setup_root_logging():
         #datefmt='%d.%m.%Y %H:%M:%S',
         #stream=sys.stdout,
         # Parent logger must have INFO level or child logger will not log get INFO level messges
-        level=logging.INFO
+        level=logging.DEBUG
+        #level=logging.INFO
         #level=logging.ERROR
         )
 
@@ -158,7 +161,7 @@ def create_logger():
     ch = logging.StreamHandler(stream=sys.stdout)
     #ch = logging.FileHandler('logfile_setup_apps.log')
     #ch.setLevel(logging.DEBUG)
-    ch.setLevel(logging.INFO)
+    ch.setLevel(logging.DEBUG)
     ch.setFormatter(formatter)
     logger_test_util.addHandler(ch)
     ch_err = logging.StreamHandler(stream=sys.stderr)
@@ -172,9 +175,10 @@ def create_logger():
 def config_logger_setup_apps():
     print('Conf the "setup_apps" at test_util')
     log = logging.getLogger('setup_apps')
-    formatter = logging.Formatter('[test_util conffed] - %(name)s - %(levelname)s - %(message)s')
+    #formatter = logging.Formatter('[test_util conffed] - %(name)s - %(levelname)s - %(message)s')
+    formatter = logging.Formatter('%(name)s - %(levelname)-5s - %(message)s [%(pathname)s:%(lineno)d]')
     ch = logging.StreamHandler(stream=sys.stdout)
-    ch.setLevel(logging.INFO)
+    ch.setLevel(logging.DEBUG)
     ch.setFormatter(formatter)
     log.addHandler(ch)
 
@@ -200,9 +204,14 @@ if __name__ == '__main__':
     print('Init messsage test_util.py')
     print('setup_apps.revision: ' + str(setup_apps.__revision__))
 
+    # Always setup logger :)
+    setup_root_logging()
+    config_logger_setup_apps()
+
     #init_testing()
     #run_command_testing()
-    logging_testing()
+    #logging_testing()
+    win_only_test()
 
     print('')
     print('')
