@@ -8,6 +8,7 @@ import setup_apps
 from setup_apps import util
 import sys
 import logging
+import os
 #from setup_apps.util import hint_test
 '''
 def hint_test(test: str) -> bool:
@@ -67,6 +68,24 @@ def init_testing():
     print('The user home path: ' + str(home_dir))
 
 def win_only_test():
+    #util.unzip('W:\\spacesniffer_1_3_0_2.zip', 'C:\\temp\\spacesniffer_1_3_0_2')
+    #util.move_win('C:\\temp\\spacesniffer_1_3_0_2', 'C:\\temp\\spacesniffer_temp')
+    exe_file = 'C:\\temp\\spacesniffer_temp\\SpaceSniffer.exe'
+    dst_link_file = os.environ.get('USERPROFILE') + '\\Desktop\\spacesniffer_temp.lnk'
+    #util.shortcut(exe_file=exe_file, dst_link_file=dst_link_file, ico='')
+    '''
+    test = util.msiexec(
+        name = 'Putty install TEST',
+        installer = 'W:\\putty-64bit-0.73-installer.msi',
+        properties = {
+            'INSTALLDIR': 'C:\\temp\\putty_temp\\',
+            'ACTION': 'INSTALL',
+            'ADDLOCAL': 'FilesFeature,DesktopFeature,PathFeature,PPKFeature',
+            },
+        log_file = 'C:\\temp\\PuttyInstall.log',
+        show_progress = True
+    )
+    '''
     util.pause()
 
 def run_command_testing():
