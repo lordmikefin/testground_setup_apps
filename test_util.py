@@ -68,7 +68,7 @@ def init_testing():
     print('The user home path: ' + str(home_dir))
 
 def win_only_test():
-    #util.unzip('W:\\spacesniffer_1_3_0_2.zip', 'C:\\temp\\spacesniffer_1_3_0_2')
+    util.unzip('W:\\spacesniffer_1_3_0_2.zip', 'C:\\temp\\spacesniffer_1_3_0_2')
     #util.move_win('C:\\temp\\spacesniffer_1_3_0_2', 'C:\\temp\\spacesniffer_temp')
     exe_file = 'C:\\temp\\spacesniffer_temp\\SpaceSniffer.exe'
     dst_link_file = os.environ.get('USERPROFILE') + '\\Desktop\\spacesniffer_temp.lnk'
