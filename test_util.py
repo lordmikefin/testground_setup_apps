@@ -86,7 +86,7 @@ def win_only_test():
         show_progress = True
     )
     '''
-    util.pause()
+    #util.pause()
 
 def run_command_testing():
     print('')
