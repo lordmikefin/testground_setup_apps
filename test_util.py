@@ -106,6 +106,7 @@ def run_command_testing():
     #test = util.run_command('echo "TEST"')
     test = util.run_command(command)
     print('Command result: ' + str(test))
+    print('Command succeeded: ' + str(test.errorlevel == 0))
 
     print('')
     print('Test function "run_command"')
@@ -115,11 +116,13 @@ def run_command_testing():
     #test = util.run_command('echo "TEST"')
     test = util.run_command(command)
     print('Command result: ' + str(test))
+    print('Command succeeded: ' + str(test.errorlevel == 0))
 
     print('')
     print('Test function "run_command"')
     test = util.run_command('echo "TEST"')
     print('Command result: ' + str(test))
+    print('Command succeeded: ' + str(test.errorlevel == 0))
     print('')
     print('NOTE: Shell internal command is not available')
 
@@ -129,36 +132,43 @@ def run_command_testing():
     print('Test function "run_command"')
     test = util.run_command('echo "TEST"', shell=True)
     print('Command result: ' + str(test))
+    print('Command succeeded: ' + str(test.errorlevel == 0))
 
     print('')
     print('Test function "run_command"')
     test = util.run_command('foo', shell=True)
     print('Command result: ' + str(test))
+    print('Command succeeded: ' + str(test.errorlevel == 0))
 
     print('')
     print('Test function "run_command"')
     test = util.run_command('echo "TEST 1" && echo "TEST 2"', shell=True)
     print('Command result: ' + str(test))
+    print('Command succeeded: ' + str(test.errorlevel == 0))
 
     print('')
     print('Test function "run_command"')
     test = util.run_command(['echo', 'TEST 1', '&&', 'echo', 'TEST 2'], shell=True)
     print('Command result: ' + str(test))
+    print('Command succeeded: ' + str(test.errorlevel == 0))
 
     print('')
     print('Test function "run_command_alt_1"')
     test = util.run_command_alt_1(['echo', 'TEST 1', '&&', 'echo', 'TEST 2'])
     print('Command result: ' + str(test))
+    print('Command succeeded: ' + str(test.returncode == 0))
 
     print('')
     print('Test function "run_command_alt_1"')
     test = util.run_command_alt_1(['echo', 'TEST 1', '&&', 'echo', 'TEST 2'], shell=True)
     print('Command result: ' + str(test))
+    print('Command succeeded: ' + str(test.returncode == 0))
 
     print('')
     print('Test function "run_command_alt_1"')
     test = util.run_command_alt_1(['foo'], shell=True)
     print('Command result: ' + str(test))
+    print('Command succeeded: ' + str(test.returncode == 0))
 
 
 def setup_root_logging():
@@ -228,9 +238,9 @@ if __name__ == '__main__':
     config_logger_setup_apps()
 
     #init_testing()
-    #run_command_testing()
+    run_command_testing()
     #logging_testing()
-    win_only_test()
+    #win_only_test()
 
     print('')
     print('')
