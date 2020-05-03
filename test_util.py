@@ -68,7 +68,12 @@ def init_testing():
     print('The user home path: ' + str(home_dir))
 
 def win_only_test():
-    util.unzip('W:\\spacesniffer_1_3_0_2.zip', 'C:\\temp\\spacesniffer_1_3_0_2')
+    src_samba = ''
+    dst_drive = 'T:'
+    #setup_apps.connect_samba_share(dst_drive=dst_drive)
+    util.connect_samba_share(src_samba = '\\\\192.168.122.1\\sambashare\\windows',
+                             dst_drive=dst_drive)
+    #util.unzip('W:\\spacesniffer_1_3_0_2.zip', 'C:\\temp\\spacesniffer_1_3_0_2')
     #util.move_win('C:\\temp\\spacesniffer_1_3_0_2', 'C:\\temp\\spacesniffer_temp')
     exe_file = 'C:\\temp\\spacesniffer_temp\\SpaceSniffer.exe'
     dst_link_file = os.environ.get('USERPROFILE') + '\\Desktop\\spacesniffer_temp.lnk'
@@ -238,9 +243,9 @@ if __name__ == '__main__':
     config_logger_setup_apps()
 
     #init_testing()
-    run_command_testing()
+    #run_command_testing()
     #logging_testing()
-    #win_only_test()
+    win_only_test()
 
     print('')
     print('')
