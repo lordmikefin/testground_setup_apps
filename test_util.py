@@ -15,6 +15,9 @@ def hint_test(test: str) -> bool:
     return isinstance(test, str)
 '''
 
+logger = logging.getLogger('test_util_local')
+logger.propagate = False
+
 
 def init_testing():
     print('')
@@ -206,6 +209,23 @@ def create_logger():
     logger_test_util.propagate = False
     return logger_test_util
 
+def create_logger_local():
+    logger_test = logging.getLogger('test_util_local')
+    formatter = logging.Formatter('%(name)s - %(levelname)-5s - %(message)s [%(pathname)s:%(lineno)d]')
+    ch = logging.StreamHandler(stream=sys.stdout)
+    ch.setLevel(logging.DEBUG)
+    ch.setFormatter(formatter)
+    logger_test.addHandler(ch)
+
+def create_logger_local_to_file(log_file_name: str):
+    logger_test = logging.getLogger('test_util_local')
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)-5s - %(message)s [%(pathname)s:%(lineno)d]')
+    #fh = logging.FileHandler('spam_test_util.log')
+    fh = logging.FileHandler(log_file_name)
+    fh.setLevel(logging.DEBUG)
+    fh.setFormatter(formatter)
+    logger_test.addHandler(fh)
+
 def config_logger_setup_apps():
     print('Conf the "setup_apps" at test_util')
     log = logging.getLogger('setup_apps')
@@ -215,6 +235,18 @@ def config_logger_setup_apps():
     ch.setLevel(logging.DEBUG)
     ch.setFormatter(formatter)
     log.addHandler(ch)
+
+def config_logger_setup_apps_to_file(log_file_name: str):
+    # https://docs.python.org/3/howto/logging-cookbook.html
+    print('Conf the "setup_apps" at test_util into file')
+    log = logging.getLogger('setup_apps')
+    #formatter = logging.Formatter('[test_util conffed] - %(name)s - %(levelname)s - %(message)s')
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)-5s - %(message)s [%(pathname)s:%(lineno)d]')
+    #fh = logging.FileHandler('spam_test_util.log')
+    fh = logging.FileHandler(log_file_name)
+    fh.setLevel(logging.DEBUG)
+    fh.setFormatter(formatter)
+    log.addHandler(fh)
 
 def logging_testing():
     # https://docs.python.org/3/library/logging.html
@@ -235,18 +267,24 @@ def logging_testing():
 
 
 if __name__ == '__main__':
-    print('Init messsage test_util.py')
-    print('setup_apps.revision: ' + str(setup_apps.__revision__))
-
     # Always setup logger :)
     setup_root_logging()
+    create_logger_local()
+    create_logger_local_to_file('spam_test_util.log')
+    
+    logger.info('Init messsage test_util.py')
+    logger.info('setup_apps.revision: ' + str(setup_apps.__revision__))
+
+    # Always setup logger :)
+    #setup_root_logging()
     config_logger_setup_apps()
+    config_logger_setup_apps_to_file('spam_test_util.log')
 
     #init_testing()
     #run_command_testing()
     #logging_testing()
     win_only_test()
 
-    print('')
-    print('')
-    print('END')
+    logger.info('')
+    logger.info('')
+    logger.info('END')
