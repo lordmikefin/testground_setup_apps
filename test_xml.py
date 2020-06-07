@@ -77,10 +77,12 @@ if __name__ == '__main__':
     setup_apps.config.create_sample()
     setup_apps.config.print_sample()
     #setup_apps.config.parse(source_file)
-    setup_apps.config.parse()
     #print('APPS: ' + json.dumps(app_source_handler.source.APPS, sort_keys=True, indent=2))
-    setup_apps.config.init()
-    setup_apps.config.download()
-    setup_apps.config.install()
-    setup_apps.config.configure()
+    if True:
+        setup_apps.config.parse()
+    if False:
+        setup_apps.config.init()
+        setup_apps.config.download()
+        setup_apps.config.install()
+        setup_apps.config.configure()
     logger.info('END')
