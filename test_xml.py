@@ -41,7 +41,8 @@ def create_hand_stderr():
     return hand_stderr
 
 def conf_setup_apps_logger():
-    logger_conf = setup_apps.logger
+    #logger_conf = setup_apps.logger
+    logger_conf = logging.getLogger('setup_apps')
     logger_conf.addHandler(create_hand_stdout())
     logger_conf.addHandler(create_hand_stderr())
 
@@ -74,7 +75,8 @@ if __name__ == '__main__':
 
     #setup_apps.config.read_write()
     #setup_apps.config.create_test_xml()
-    setup_apps.config.create_sample()
+    if False:
+        setup_apps.config.create_sample()
     setup_apps.config.print_sample()
     #setup_apps.config.parse(source_file)
     #print('APPS: ' + json.dumps(app_source_handler.source.APPS, sort_keys=True, indent=2))
