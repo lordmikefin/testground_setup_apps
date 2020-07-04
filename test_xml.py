@@ -94,6 +94,6 @@ if __name__ == '__main__':
         setup_apps.config.download()
     if True:
         setup_apps.config.install()
-    if False:
+    if True:
         setup_apps.config.configure()
     logger.info('END')
