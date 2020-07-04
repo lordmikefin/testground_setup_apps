@@ -92,7 +92,7 @@ if __name__ == '__main__':
         setup_apps.config.init()
     if True:
         setup_apps.config.download()
-    if False:
+    if True:
         setup_apps.config.install()
     if False:
         setup_apps.config.configure()
