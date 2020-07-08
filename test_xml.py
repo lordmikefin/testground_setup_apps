@@ -73,7 +73,7 @@ if __name__ == '__main__':
     conf_setup_apps_logger()
     conf_app_source_handler_logger()
     conf_LMToyBoxPython_handler_logger()
-    LMToyBoxPython.logging_test()
+    #LMToyBoxPython.logging_test()
     setup_apps.util.stop_urllib3_logger()
 
     logger = create_logger()
