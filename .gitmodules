@@ -4,3 +4,6 @@
 [submodule "app_source_handler"]
 	path = app_source_handler
 	url = https://github.com/lordmikefin/app_source_handler.git
+[submodule "LMToyBoxPython"]
+	path = LMToyBoxPython
+	url = https://github.com/lordmikefin/LMToyBoxPython.git
