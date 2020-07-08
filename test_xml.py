@@ -11,6 +11,7 @@ from setup_apps import util
 #import app_source_handler
 import logging
 import sys
+import LMToyBoxPython
 
 def conf_root_logger():
     # Default log level.
@@ -51,6 +52,11 @@ def conf_app_source_handler_logger():
     logger_conf.addHandler(create_hand_stdout())
     logger_conf.addHandler(create_hand_stderr())
 
+def conf_LMToyBoxPython_handler_logger():
+    logger_conf = logging.getLogger('LMToyBoxPython')
+    logger_conf.addHandler(create_hand_stdout())
+    logger_conf.addHandler(create_hand_stderr())
+
 def create_logger():
     logger = logging.getLogger('test_xml')
     logger.addHandler(create_hand_stdout())
@@ -66,6 +72,8 @@ if __name__ == '__main__':
     conf_root_logger()
     conf_setup_apps_logger()
     conf_app_source_handler_logger()
+    conf_LMToyBoxPython_handler_logger()
+    LMToyBoxPython.logging_test()
     setup_apps.util.stop_urllib3_logger()
 
     logger = create_logger()
