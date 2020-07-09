@@ -12,19 +12,26 @@ from setup_apps import util
 import logging
 import sys
 import LMToyBoxPython
+from datetime import datetime
 
 def conf_root_logger():
     # Default log level.
     logging.basicConfig(level=logging.DEBUG)
 
-def create_formatter():
+def create_formatter(log_log_point: bool=True):
     #formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s: %(message)s')
     #formatter = logging.Formatter('%(name)-10s - %(levelname)-4s: %(message)s')
     f_str = '[%(name)-10s] %(levelname)-4s: %(message)s'
-    # TODO: parameterize: show file/line
-    f_str += ' [%(pathname)s:%(lineno)d]'
+    if log_log_point:
+        f_str += ' [%(pathname)s:%(lineno)d]'
     formatter = logging.Formatter(f_str)
     return formatter
+
+def create_hand_file(log_file_name: str):
+    hand = logging.FileHandler(log_file_name)
+    hand.setLevel(logging.DEBUG)
+    hand.setFormatter(create_formatter(log_log_point=False))
+    return hand
 
 def create_hand_stdout():
     hand_stdout = logging.StreamHandler(stream=sys.stdout)
@@ -41,26 +48,34 @@ def create_hand_stderr():
     hand_stderr.setFormatter(formatter)
     return hand_stderr
 
-def conf_setup_apps_logger():
+def conf_setup_apps_logger(log_file_name: str=''):
     #logger_conf = setup_apps.logger
     logger_conf = logging.getLogger('setup_apps')
     logger_conf.addHandler(create_hand_stdout())
     logger_conf.addHandler(create_hand_stderr())
+    if log_file_name:
+        logger_conf.addHandler(create_hand_file(log_file_name))
 
-def conf_app_source_handler_logger():
+def conf_app_source_handler_logger(log_file_name: str=''):
     logger_conf = logging.getLogger('app_source_handler')
     logger_conf.addHandler(create_hand_stdout())
     logger_conf.addHandler(create_hand_stderr())
+    if log_file_name:
+        logger_conf.addHandler(create_hand_file(log_file_name))
 
-def conf_LMToyBoxPython_handler_logger():
+def conf_LMToyBoxPython_handler_logger(log_file_name: str=''):
     logger_conf = logging.getLogger('LMToyBoxPython')
     logger_conf.addHandler(create_hand_stdout())
     logger_conf.addHandler(create_hand_stderr())
+    if log_file_name:
+        logger_conf.addHandler(create_hand_file(log_file_name))
 
-def create_logger():
+def create_logger(log_file_name: str=''):
     logger = logging.getLogger('test_xml')
     logger.addHandler(create_hand_stdout())
     logger.addHandler(create_hand_stderr())
+    if log_file_name:
+        logger.addHandler(create_hand_file(log_file_name))
     logger.propagate = False
     return logger
 
@@ -69,14 +84,16 @@ SOURCE_PATH = util.fix_path(util.home_path() + '/LM_ToyBox/setup_apps')
 SOURCE_FILE = 'app_source.xml'
 
 if __name__ == '__main__':
+    log_file_name = 'test.log'
     conf_root_logger()
-    conf_setup_apps_logger()
-    conf_app_source_handler_logger()
-    conf_LMToyBoxPython_handler_logger()
+    conf_setup_apps_logger(log_file_name)
+    conf_app_source_handler_logger(log_file_name)
+    conf_LMToyBoxPython_handler_logger(log_file_name)
     #LMToyBoxPython.logging_test()
     setup_apps.util.stop_urllib3_logger()
 
-    logger = create_logger()
+    logger = create_logger(log_file_name)
+    logger.info('Start time: ' + str(datetime.now()))
     logger.info('Init messsage test_xml.py')
     logger.error('Error logging test')
     logger.debug('Debug logging test')
@@ -104,4 +121,5 @@ if __name__ == '__main__':
         setup_apps.config.install()
     if True:
         setup_apps.config.configure()
+    logger.info('Stop time: ' + str(datetime.now()))
     logger.info('END')
