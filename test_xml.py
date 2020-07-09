@@ -84,7 +84,9 @@ SOURCE_PATH = util.fix_path(util.home_path() + '/LM_ToyBox/setup_apps')
 SOURCE_FILE = 'app_source.xml'
 
 if __name__ == '__main__':
-    log_file_name = 'test.log'
+    log_file_name = ''
+    if False:
+        log_file_name = 'test.log'
     conf_root_logger()
     conf_setup_apps_logger(log_file_name)
     conf_app_source_handler_logger(log_file_name)
