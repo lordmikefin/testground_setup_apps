@@ -13,6 +13,7 @@ import logging
 import sys
 import LMToyBoxPython
 from datetime import datetime
+import traceback
 
 def conf_root_logger():
     # Default log level.
@@ -85,7 +86,7 @@ SOURCE_FILE = 'app_source.xml'
 
 if __name__ == '__main__':
     log_file_name = ''
-    if False:
+    if True:
         log_file_name = 'test.log'
     conf_root_logger()
     conf_setup_apps_logger(log_file_name)
@@ -101,27 +102,41 @@ if __name__ == '__main__':
     logger.debug('Debug logging test')
     logger.info('setup_apps.revision: ' + str(setup_apps.__revision__))
 
-    # NOTE: Just testing the 'app_source_handler'
-    #update_app_source.source.parse(source_file)
-    #app_source_handler.source.parse(util.fix_path(SOURCE_PATH + '/' + SOURCE_FILE))
-    #source_file = util.fix_path(SOURCE_PATH + '/' + SOURCE_FILE)
+    try:
+        # TODO: is rised errors logged into the log file?
+        raise Exception('Test error')
 
-    #setup_apps.config.read_write()
-    #setup_apps.config.create_test_xml()
-    if False:
-        setup_apps.config.create_sample()
-    setup_apps.config.print_sample()
-    #setup_apps.config.parse(source_file)
-    #print('APPS: ' + json.dumps(app_source_handler.source.APPS, sort_keys=True, indent=2))
-    if True:
-        setup_apps.config.parse()
-    if True:
-        setup_apps.config.init()
-    if True:
-        setup_apps.config.download()
-    if True:
-        setup_apps.config.install()
-    if True:
-        setup_apps.config.configure()
+        # NOTE: Just testing the 'app_source_handler'
+        #update_app_source.source.parse(source_file)
+        #app_source_handler.source.parse(util.fix_path(SOURCE_PATH + '/' + SOURCE_FILE))
+        #source_file = util.fix_path(SOURCE_PATH + '/' + SOURCE_FILE)
+
+        #setup_apps.config.read_write()
+        #setup_apps.config.create_test_xml()
+        if False:
+            setup_apps.config.create_sample()
+        setup_apps.config.print_sample()
+        #setup_apps.config.parse(source_file)
+        #print('APPS: ' + json.dumps(app_source_handler.source.APPS, sort_keys=True, indent=2))
+        if True:
+            setup_apps.config.parse()
+        if True:
+            setup_apps.config.init()
+        if True:
+            setup_apps.config.download()
+        if True:
+            setup_apps.config.install()
+        if True:
+            setup_apps.config.configure()
+    #except Exception as err:
+    #    logger.error(err)
+    except:
+        logger.error("Unexpected error: " + str(sys.exc_info()[0]))
+        # print stck trace
+        # https://docs.python.org/3/library/traceback.html
+        #traceback.print_exc()
+        formatted_lines = traceback.format_exc()
+        logger.error(formatted_lines)
+
     logger.info('Stop time: ' + str(datetime.now()))
     logger.info('END')
