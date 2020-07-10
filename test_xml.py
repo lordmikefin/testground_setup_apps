@@ -86,7 +86,7 @@ SOURCE_FILE = 'app_source.xml'
 
 if __name__ == '__main__':
     log_file_name = ''
-    if True:
+    if False:
         log_file_name = 'test.log'
     conf_root_logger()
     conf_setup_apps_logger(log_file_name)
@@ -103,8 +103,8 @@ if __name__ == '__main__':
     logger.info('setup_apps.revision: ' + str(setup_apps.__revision__))
 
     try:
-        # TODO: is rised errors logged into the log file?
-        raise Exception('Test error')
+        # NOTE: testing raised errors logging
+        #raise Exception('Test error')
 
         # NOTE: Just testing the 'app_source_handler'
         #update_app_source.source.parse(source_file)
