@@ -113,16 +113,16 @@ if __name__ == '__main__':
 
         #setup_apps.config.read_write()
         #setup_apps.config.create_test_xml()
-        if True:
+        if False:
             setup_apps.config.create_sample()
         setup_apps.config.print_sample()
         #setup_apps.config.parse(source_file)
         #print('APPS: ' + json.dumps(app_source_handler.source.APPS, sort_keys=True, indent=2))
         if True:
             setup_apps.config.parse()
-        if False:
+        if True:
             setup_apps.config.init()
-        if False:
+        if True:
             setup_apps.config.download()
         if False:
             setup_apps.config.install()
