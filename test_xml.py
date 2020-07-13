@@ -120,11 +120,11 @@ if __name__ == '__main__':
         #print('APPS: ' + json.dumps(app_source_handler.source.APPS, sort_keys=True, indent=2))
         if True:
             setup_apps.config.parse()
-        if True:
+        if False:
             setup_apps.config.init()
-        if True:
+        if False:
             setup_apps.config.download()
-        if True:
+        if False:
             setup_apps.config.install()
         if False:
             setup_apps.config.configure()
