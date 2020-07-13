@@ -113,7 +113,7 @@ if __name__ == '__main__':
 
         #setup_apps.config.read_write()
         #setup_apps.config.create_test_xml()
-        if False:
+        if True:
             setup_apps.config.create_sample()
         setup_apps.config.print_sample()
         #setup_apps.config.parse(source_file)
@@ -122,11 +122,11 @@ if __name__ == '__main__':
             setup_apps.config.parse()
         if True:
             setup_apps.config.init()
-        if True:
-            setup_apps.config.download()
-        if True:
-            setup_apps.config.install()
         if False:
+            setup_apps.config.download()
+        if False:
+            setup_apps.config.install()
+        if True:
             setup_apps.config.configure()
     #except Exception as err:
     #    logger.error(err)
