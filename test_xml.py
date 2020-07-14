@@ -113,7 +113,7 @@ if __name__ == '__main__':
 
         #setup_apps.config.read_write()
         #setup_apps.config.create_test_xml()
-        if True:
+        if False:
             setup_apps.config.create_sample()
         setup_apps.config.print_sample()
         #setup_apps.config.parse(source_file)
