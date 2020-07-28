@@ -9,6 +9,7 @@ from setup_apps import util
 import sys
 import logging
 import os
+from LMToyBoxPython import LMhashlib
 #from setup_apps.util import hint_test
 '''
 def hint_test(test: str) -> bool:
@@ -18,6 +19,7 @@ def hint_test(test: str) -> bool:
 logger = logging.getLogger('test_util_local')
 logger.propagate = False
 
+# TODO: create speed test for  LMhashlib._hash_core(...) and optimize it 
 
 def init_testing():
     logger.info('')
