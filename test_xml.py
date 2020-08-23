@@ -111,7 +111,7 @@ if __name__ == '__main__':
         #app_source_handler.source.parse(util.fix_path(SOURCE_PATH + '/' + SOURCE_FILE))
         #source_file = util.fix_path(SOURCE_PATH + '/' + SOURCE_FILE)
 
-        if False:
+        if True:
             setup_apps.config.create_sample()
         setup_apps.config.print_sample()
         #setup_apps.config.parse(source_file)
