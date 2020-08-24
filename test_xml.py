@@ -81,8 +81,8 @@ def create_logger(log_file_name: str=''):
     return logger
 
 
-SOURCE_PATH = util.fix_path(util.home_path() + '/LM_ToyBox/setup_apps')
-SOURCE_FILE = 'app_source.xml'
+#SOURCE_PATH = util.fix_path(util.home_path() + '/LM_ToyBox/setup_apps')
+#SOURCE_FILE = 'app_source.xml'
 
 if __name__ == '__main__':
     log_file_name = ''
@@ -112,11 +112,11 @@ if __name__ == '__main__':
         #source_file = util.fix_path(SOURCE_PATH + '/' + SOURCE_FILE)
 
         if True:
-            setup_apps.config.create_sample(overwrite=True)
+            setup_apps.config.create_sample(overwrite=False)
         setup_apps.config.print_sample()
         #setup_apps.config.parse(source_file)
         #print('APPS: ' + json.dumps(app_source_handler.source.APPS, sort_keys=True, indent=2))
-        if False:
+        if True:
             setup_apps.config.parse()
         if False:
             setup_apps.config.init()
