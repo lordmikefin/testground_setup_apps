@@ -112,7 +112,7 @@ if __name__ == '__main__':
         #source_file = util.fix_path(SOURCE_PATH + '/' + SOURCE_FILE)
 
         if True:
-            setup_apps.config.create_sample()
+            setup_apps.config.create_sample(overwrite=True)
         setup_apps.config.print_sample()
         #setup_apps.config.parse(source_file)
         #print('APPS: ' + json.dumps(app_source_handler.source.APPS, sort_keys=True, indent=2))
