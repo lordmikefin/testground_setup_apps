@@ -73,6 +73,8 @@ def init_testing():
     logger.info('The user home path: ' + str(home_dir))
 
 def win_only_test():
+    if not util.is_os_windows():
+        return
     src_samba = ''
     dst_drive = 'T:'
     #setup_apps.connect_samba_share(dst_drive=dst_drive)
