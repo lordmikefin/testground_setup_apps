@@ -59,9 +59,17 @@ def init_testing():
     logger.info('hint_test_complex: ' + str(test))
 
     logger.info('')
+    logger.info('This system is: ' + str(sys.platform))
+
+    logger.info('')
     logger.info('Test function "is_os_windows"')
     test = util.is_os_windows()
     logger.info('This system is Windows: ' + str(test))
+
+    logger.info('')
+    logger.info('Test function "is_os_linux"')
+    test = util.is_os_linux()
+    logger.info('This system is linux: ' + str(test))
 
     logger.info('')
     logger.info('Test function "pause"')
@@ -283,7 +291,7 @@ if __name__ == '__main__':
     config_logger_setup_apps()
     config_logger_setup_apps_to_file('spam_test_util.log')
 
-    #init_testing()
+    init_testing()
     #run_command_testing()
     #logging_testing()
     win_only_test()
