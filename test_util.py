@@ -10,6 +10,7 @@ import sys
 import logging
 import os
 from LMToyBoxPython import LMhashlib
+import inspect
 #from setup_apps.util import hint_test
 '''
 def hint_test(test: str) -> bool:
@@ -22,12 +23,11 @@ logger.propagate = False
 # TODO: create speed test for  LMhashlib._hash_core(...) and optimize it 
 
 def init_testing():
-    logger.info('')
+    logger.info(' ===  ' + str(inspect.currentframe().f_code.co_name) + '  === ')
     logger.info('Test function "python_version_str"')
     test = util.python_version_str()
     logger.info('Python version: ' + str(test))
 
-    logger.info('')
     logger.info('Test function "python_version"')
     test = util.python_version()
     logger.info('Python version: ' + str(test))
@@ -35,7 +35,6 @@ def init_testing():
     # NOTE: This code is tested only with Python version 3.7
     assert sys.version_info >= (3, 7)
 
-    logger.info('')
     logger.info('Test function "hint_test"')
     # TODO: why __annotations__ is marked as error in Eclipse?!
     logger.info('annotations: ' + str(util.hint_test.__annotations__))
@@ -48,7 +47,6 @@ def init_testing():
     test = util.hint_test(1)
     logger.info('hint_test: ' + str(test))
 
-    logger.info('')
     logger.info('Test function "hint_test_complex"')
     logger.info('annotations: ' + str(util.hint_test_complex.__annotations__))
     logger.info('Call: ' + "hint_test_complex('test')")
@@ -58,30 +56,28 @@ def init_testing():
     test = util.hint_test_complex(1)
     logger.info('hint_test_complex: ' + str(test))
 
-    logger.info('')
     logger.info('This system is: ' + str(sys.platform))
 
-    logger.info('')
     logger.info('Test function "is_os_windows"')
     test = util.is_os_windows()
     logger.info('This system is Windows: ' + str(test))
 
-    logger.info('')
     logger.info('Test function "is_os_linux"')
     test = util.is_os_linux()
     logger.info('This system is linux: ' + str(test))
 
-    logger.info('')
     logger.info('Test function "pause"')
     util.pause()
 
-    logger.info('')
     logger.info('Test function "home_path"')
     home_dir = util.home_path()
     logger.info('The user home path: ' + str(home_dir))
 
 def win_only_test():
+    logger.info(' ===  ' + str(inspect.currentframe().f_code.co_name) + '  === ')
     if not util.is_os_windows():
+        # TODO: how to connect samba in Linux?
+        logger.info('Not Windows OS. Nothing to test.')
         return
     src_samba = ''
     dst_drive = 'T:'
@@ -109,17 +105,15 @@ def win_only_test():
     #util.pause()
 
 def run_command_testing():
-    logger.info('')
+    logger.info(' ===  ' + str(inspect.currentframe().f_code.co_name) + '  === ')
     logger.info('Test function "run_os_command"')
     test = util.run_os_command('echo "TEST"')
     logger.info('Command succeeded: ' + str(test))
 
-    logger.info('')
     logger.info('Test function "run_os_command"')
     test = util.run_os_command('foo')
     logger.info('Command succeeded: ' + str(test))
 
-    logger.info('')
     logger.info('Test function "run_command"')
     command = '"python.exe"'
     command = command + ' --version'
@@ -128,7 +122,6 @@ def run_command_testing():
     logger.info('Command result: ' + str(test))
     logger.info('Command succeeded: ' + str(test.errorlevel == 0))
 
-    logger.info('')
     logger.info('Test function "run_command"')
     #command = '"' + str(PATH_APP_PY38) + '\\python.exe"'
     command = '"' + 'C:\\Program Files\\Python38' + '\\python.exe"'
@@ -138,52 +131,43 @@ def run_command_testing():
     logger.info('Command result: ' + str(test))
     logger.info('Command succeeded: ' + str(test.errorlevel == 0))
 
-    logger.info('')
     logger.info('Test function "run_command"')
     test = util.run_command('echo "TEST"')
     logger.info('Command result: ' + str(test))
     logger.info('Command succeeded: ' + str(test.errorlevel == 0))
-    logger.info('')
     logger.debug('NOTE: Shell internal command is not available')
 
     logger.debug('NOTE: without shell "echo" command does not exist')
-    logger.info('')
     logger.info('Test function "run_command"')
     test = util.run_command('echo "TEST"', shell=True)
     logger.info('Command result: ' + str(test))
     logger.info('Command succeeded: ' + str(test.errorlevel == 0))
 
-    logger.info('')
     logger.info('Test function "run_command"')
     test = util.run_command('foo', shell=True)
     logger.info('Command result: ' + str(test))
     logger.info('Command succeeded: ' + str(test.errorlevel == 0))
 
-    logger.info('')
     logger.info('Test function "run_command"')
     test = util.run_command('echo "TEST 1" && echo "TEST 2"', shell=True)
     logger.info('Command result: ' + str(test))
     logger.info('Command succeeded: ' + str(test.errorlevel == 0))
 
-    logger.info('')
     logger.info('Test function "run_command"')
     test = util.run_command(['echo', 'TEST 1', '&&', 'echo', 'TEST 2'], shell=True)
     logger.info('Command result: ' + str(test))
     logger.info('Command succeeded: ' + str(test.errorlevel == 0))
 
-    logger.info('')
     logger.info('Test function "run_command_alt_1"')
     test = util.run_command_alt_1(['echo', 'TEST 1', '&&', 'echo', 'TEST 2'])
     logger.info('Command result: ' + str(test))
     logger.info('Command succeeded: ' + str(test.returncode == 0))
 
-    logger.info('')
     logger.info('Test function "run_command_alt_1"')
     test = util.run_command_alt_1(['echo', 'TEST 1', '&&', 'echo', 'TEST 2'], shell=True)
     logger.info('Command result: ' + str(test))
     logger.info('Command succeeded: ' + str(test.returncode == 0))
 
-    logger.info('')
     logger.info('Test function "run_command_alt_1"')
     test = util.run_command_alt_1(['foo'], shell=True)
     logger.info('Command result: ' + str(test))
@@ -191,6 +175,7 @@ def run_command_testing():
 
 
 def setup_root_logging():
+    logger.info(' ===  ' + str(inspect.currentframe().f_code.co_name) + '  === ')
     logging.basicConfig(
         #format='%(asctime)s:%(levelname)s:%(name)s:%(message)s',
         #format=None,
@@ -204,6 +189,7 @@ def setup_root_logging():
         )
 
 def create_logger():
+    logger.info(' ===  ' + str(inspect.currentframe().f_code.co_name) + '  === ')
     logger_test_util = logging.getLogger('test_util')
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s {%(pathname)s:%(lineno)d}')
     ch = logging.StreamHandler(stream=sys.stdout)
@@ -221,6 +207,7 @@ def create_logger():
     return logger_test_util
 
 def create_logger_local():
+    logger.info(' ===  ' + str(inspect.currentframe().f_code.co_name) + '  === ')
     logger_test = logging.getLogger('test_util_local')
     formatter = logging.Formatter('%(name)s - %(levelname)-5s - %(message)s [%(pathname)s:%(lineno)d]')
     ch = logging.StreamHandler(stream=sys.stdout)
@@ -229,6 +216,7 @@ def create_logger_local():
     logger_test.addHandler(ch)
 
 def create_logger_local_to_file(log_file_name: str):
+    logger.info(' ===  ' + str(inspect.currentframe().f_code.co_name) + '  === ')
     logger_test = logging.getLogger('test_util_local')
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)-5s - %(message)s [%(pathname)s:%(lineno)d]')
     #fh = logging.FileHandler('spam_test_util.log')
@@ -238,6 +226,7 @@ def create_logger_local_to_file(log_file_name: str):
     logger_test.addHandler(fh)
 
 def config_logger_setup_apps():
+    logger.info(' ===  ' + str(inspect.currentframe().f_code.co_name) + '  === ')
     logger.info('Conf the "setup_apps" at test_util')
     log = logging.getLogger('setup_apps')
     #formatter = logging.Formatter('[test_util conffed] - %(name)s - %(levelname)s - %(message)s')
@@ -248,6 +237,7 @@ def config_logger_setup_apps():
     log.addHandler(ch)
 
 def config_logger_setup_apps_to_file(log_file_name: str):
+    logger.info(' ===  ' + str(inspect.currentframe().f_code.co_name) + '  === ')
     # https://docs.python.org/3/howto/logging-cookbook.html
     logger.info('Conf the "setup_apps" at test_util into file')
     log = logging.getLogger('setup_apps')
@@ -260,6 +250,7 @@ def config_logger_setup_apps_to_file(log_file_name: str):
     log.addHandler(fh)
 
 def logging_testing():
+    logger.info(' ===  ' + str(inspect.currentframe().f_code.co_name) + '  === ')
     # https://docs.python.org/3/library/logging.html
     # https://docs.python.org/3/howto/logging.html
     # https://docs.python.org/3/howto/logging.html#configuring-logging-for-a-library
@@ -278,10 +269,12 @@ def logging_testing():
 
 
 if __name__ == '__main__':
+    #logger.info('START of "test_util.py"') # 'logger' is not setup at this point
     # Always setup logger :)
     setup_root_logging()
     create_logger_local()
     create_logger_local_to_file('spam_test_util.log')
+    logger.info('START of "test_util.py"') # No logger at this point
     
     logger.info('Init messsage test_util.py')
     logger.info('setup_apps.revision: ' + str(setup_apps.__revision__))
@@ -296,6 +289,4 @@ if __name__ == '__main__':
     #logging_testing()
     win_only_test()
 
-    logger.info('')
-    logger.info('')
-    logger.info('END')
+    logger.info('END   of "test_util.py"')
