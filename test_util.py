@@ -26,6 +26,8 @@ def init_testing():
     logger.info(' ===  ' + str(inspect.currentframe().f_code.co_name) + '  === ')
     logger.info('Test function "python_version_str"')
     test = util.python_version_str()
+    #test = test.replace('\n', '\t')
+    test = util.convert_multiline_to_singleline(test)
     logger.info('Python version: ' + str(test))
 
     logger.info('Test function "python_version"')
