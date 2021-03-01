@@ -117,10 +117,21 @@ def run_command_testing():
     logger.info('Command succeeded: ' + str(test))
 
     logger.info('Test function "run_command"')
-    command = '"python.exe"'
+    if util.is_os_windows():
+        command = '"python.exe"'
+    else:
+        command = '"python3"'
     command = command + ' --version'
     #test = util.run_command('echo "TEST"')
-    test = util.run_command(command)
+    if util.is_os_windows(): 
+        test = util.run_command(command)
+    elif util.is_os_linux():
+        logger.error('TODO: why this test will halt forever?')
+        #test = util.run_command(command)
+        logger.error('But when modified test will work ?!')
+        test = util.run_command(command, shell=True)
+    else:
+        test = util.run_command(command, shell=True)
     logger.info('Command result: ' + str(test))
     logger.info('Command succeeded: ' + str(test.errorlevel == 0))
 
@@ -129,12 +140,23 @@ def run_command_testing():
     command = '"' + 'C:\\Program Files\\Python38' + '\\python.exe"'
     command = command + ' --version'
     #test = util.run_command('echo "TEST"')
-    test = util.run_command(command)
+    if util.is_os_windows():
+        test = util.run_command(command)
+    else:
+        logger.warning('TODO: is there similar test for this case ?')
     logger.info('Command result: ' + str(test))
     logger.info('Command succeeded: ' + str(test.errorlevel == 0))
 
     logger.info('Test function "run_command"')
-    test = util.run_command('echo "TEST"')
+    if util.is_os_windows(): 
+        test = util.run_command('echo "TEST"')
+    elif util.is_os_linux():
+        logger.error('TODO: why this test will halt forever?')
+        #test = util.run_command('echo "TEST"')
+        logger.error('But when modified test will work ?!')
+        test = util.run_command('echo "TEST"', shell=True)
+    else:
+        test = util.run_command('echo "TEST"')
     logger.info('Command result: ' + str(test))
     logger.info('Command succeeded: ' + str(test.errorlevel == 0))
     logger.debug('NOTE: Shell internal command is not available')
@@ -286,8 +308,8 @@ if __name__ == '__main__':
     config_logger_setup_apps()
     config_logger_setup_apps_to_file('spam_test_util.log')
 
-    init_testing()
-    #run_command_testing()
+    #init_testing()
+    run_command_testing()
     #logging_testing()
     win_only_test()
 
