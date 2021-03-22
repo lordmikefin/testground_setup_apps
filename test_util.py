@@ -324,7 +324,9 @@ def linux_sudo_test():
     #  -S, --stdin                   read password from standard input
     #subprocess.call(shlex.split('sudo id -nuA'))
     #subprocess.call(shlex.split('sudo id -nuS'))
-    val = input("Enter sudo password: ")
+    #val = input("Enter sudo password: ")
+    #val = getpass.getpass(prompt, stream)
+    val = getpass.getpass()
     #subprocess.call(shlex.split('echo ' + val + ' | sudo id -nuS'))
     #util.run_command('echo ' + val + ' | sudo id -nuS', shell=True)
     util.run_command('echo ' + val + ' | sudo -S id', shell=True)
@@ -351,8 +353,9 @@ def linux_sudo_test():
     from elevate import elevate
     #  elevate 0.1.3
     #  pip install elevate
+    # NOTE: 'elevate' will restart the script
     #elevate()
-    elevate(graphical=False)
+    #elevate(graphical=False)
 
     if not util.is_root():
         logger.info("not root")
