@@ -292,6 +292,15 @@ def logging_testing():
     util.logging_test()
 
 
+def linux_sudo_test():
+    if not util.is_root():
+        # https://stackoverflow.com/questions/5191878/change-to-sudo-user-within-a-python-script
+        #raise NotSudo("This program is not run as sudo or elevated this it will not work")
+        logger.info("not root")
+    else:
+        logger.info("is root")
+
+
 if __name__ == '__main__':
     #logger.info('START of "test_util.py"') # 'logger' is not setup at this point
     # Always setup logger :)
@@ -308,9 +317,15 @@ if __name__ == '__main__':
     config_logger_setup_apps()
     config_logger_setup_apps_to_file('spam_test_util.log')
 
-    #init_testing()
-    run_command_testing()
-    #logging_testing()
-    win_only_test()
+    if False:
+        init_testing()
+    if False:
+        run_command_testing()
+    if False:
+        logging_testing()
+    if False:
+        win_only_test()
+    if True:
+        linux_sudo_test()
 
     logger.info('END   of "test_util.py"')
