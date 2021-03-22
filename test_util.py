@@ -304,6 +304,63 @@ def linux_sudo_test():
     else:
         logger.info("is root")
 
+    import subprocess
+    returncode = subprocess.call(["/usr/bin/sudo", "/usr/bin/id"])
+    logger.info('returncode: ' + str(returncode))
+
+    if not util.is_root():
+        logger.info("not root")
+    else:
+        logger.info("is root")
+
+    import shlex
+    import getpass
+
+    logger.info("This script was called by: " + getpass.getuser())
+
+    logger.info("Now do something as 'root'...")
+    subprocess.call(shlex.split('sudo id -nu'))
+    #  -A, --askpass                 use a helper program for password prompting
+    #  -S, --stdin                   read password from standard input
+    #subprocess.call(shlex.split('sudo id -nuA'))
+    #subprocess.call(shlex.split('sudo id -nuS'))
+    val = input("Enter sudo password: ")
+    #subprocess.call(shlex.split('echo ' + val + ' | sudo id -nuS'))
+    #util.run_command('echo ' + val + ' | sudo id -nuS', shell=True)
+    util.run_command('echo ' + val + ' | sudo -S id', shell=True)
+
+    logger.info("Now switch back to the calling user: " + getpass.getuser())
+
+    if not util.is_root():
+        logger.info("not root")
+    else:
+        logger.info("is root")
+
+    # https://stackoverflow.com/questions/21659637/how-to-fix-sudo-no-tty-present-and-no-askpass-program-specified-error
+    # echo <password> | sudo -S <cmd>
+    
+    # https://www.geeksforgeeks.org/taking-input-in-python/
+    #val = input("Enter your value: ")
+    #logger.info('val: ' + str(val))
+
+    #util.pause()
+
+    # https://pypi.org/project/elevate/
+    # Elevate is a small Python library that re-launches the current process with root/admin privileges
+    #import os
+    from elevate import elevate
+    #  elevate 0.1.3
+    #  pip install elevate
+    #elevate()
+    elevate(graphical=False)
+
+    if not util.is_root():
+        logger.info("not root")
+    else:
+        logger.info("is root")
+
+    #https://stackoverflow.com/questions/55857886/how-to-elevate-to-root-within-a-python-script
+
 
 if __name__ == '__main__':
     #logger.info('START of "test_util.py"') # 'logger' is not setup at this point
