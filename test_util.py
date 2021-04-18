@@ -11,6 +11,7 @@ import logging
 import os
 from LMToyBoxPython import LMhashlib
 import inspect
+from setup_apps.namedtuples import CommandRet
 #from setup_apps.util import hint_test
 '''
 def hint_test(test: str) -> bool:
@@ -293,6 +294,14 @@ def logging_testing():
 
 
 def linux_sudo_test():
+    ret = util.run_command_sudo('id') #: :type ret: CommandRet
+    logger.info('stdout: ' + ret.stdout)
+
+    ret = util.run_command_sudo('id') #: :type ret: CommandRet
+    logger.info('stdout: ' + ret.stdout)
+
+
+def linux_sudo_test_alter():
     if util.is_os_windows():
         logger.info('These test are not for windows os')
         return
@@ -391,5 +400,6 @@ if __name__ == '__main__':
         win_only_test()
     if True:
         linux_sudo_test()
+        #linux_sudo_test_alter()
 
     logger.info('END   of "test_util.py"')
