@@ -98,4 +98,5 @@ class Config(object):
 
     class TestXml():
         _section = 'test_xml.py'
-        log_to_file = isTrue(_section, 'log_to_file', default=False)
+        log_to_file = False
+        #log_to_file = isTrue(_section, 'log_to_file', default=False)
