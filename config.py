@@ -37,8 +37,10 @@ def getConfigFileContent() -> configparser.RawConfigParser:
         temp = configparser.RawConfigParser()
         temp.add_section('section')
         temp.set('section', 'option', 'value')
-        with open(conffile, 'wb') as configfile:
+        #logger.debug("[{}]\n".format('section_name'))
+        with open(conffile, 'w') as configfile:
             temp.write(configfile)
+            #configfile.write("[{}]\n".format('section_name'))
         pass
     raiseErrorFileNotFound(conffile)
 
