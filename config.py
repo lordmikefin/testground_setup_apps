@@ -34,6 +34,11 @@ def getConfigFileContent() -> configparser.RawConfigParser:
 
     if not util.is_file(conffile):
         # TODO: create test.ini with default values
+        temp = configparser.RawConfigParser()
+        temp.add_section('section')
+        temp.set('section', 'option', 'value')
+        with open(conffile, 'wb') as configfile:
+            temp.write(configfile)
         pass
     raiseErrorFileNotFound(conffile)
 
@@ -50,11 +55,9 @@ def getFromConfigfile(section: str, option: str, default: str=None, reraise: boo
         value = configfile.get(section, option)
     except (configparser.NoSectionError, configparser.NoOptionError) as e:
         if reraise:
-            # print(__name__ + ".getFromConfigfile(): ERROR: " + str(e))
             logger.error(str(e))
             raise e
 
-        # print(__name__ + ".getFromConfigfile(): INFO: " + str(e))
         logger.info(str(e))
         return default
 
@@ -126,4 +129,8 @@ class Config(object):
         conf = Config()
         conf.test_xml.log_to_file()
         return conf
+
+    @staticmethod
+    def write_ini_file():
+        pass
 
