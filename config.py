@@ -29,10 +29,10 @@ def getConfigFileContent() -> configparser.RawConfigParser:
 
     _CONFIGFILE = configparser.RawConfigParser(allow_no_value=True)
     conffile = 'test.ini'
-    logger.error('I will try to use default config file.')
     logger.info('Config path: ' + str(conffile))
 
     if not util.is_file(conffile):
+        logger.info('I will try to create default config file.')
         # TODO: create test.ini with default values
         temp = configparser.RawConfigParser()
         #temp.add_section('section')
@@ -96,11 +96,16 @@ def isTrue(section: str, option: str, default: bool=False) -> bool:
 
 class TestUtil():
     _section = 'test_util.py'
+    _log_to_file = False
+    _log_file_name = 'spam_test_util.log'
 
     def __init__(self, params=None):
         '''
         Constructor
         '''
+
+    def log_to_file(self):
+        self.log_to_file = isTrue(self._section, 'log_to_file', default=False)
 
 
 class TestXml():

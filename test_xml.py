@@ -14,6 +14,7 @@ import sys
 import LMToyBoxPython
 from datetime import datetime
 import traceback
+from config import Config
 
 def conf_root_logger():
     # Default log level.
@@ -48,6 +49,13 @@ def create_hand_stderr():
     formatter = logging.Formatter(f_str)
     hand_stderr.setFormatter(formatter)
     return hand_stderr
+
+def conf_logger(logger_name: str, log_file_name: str=''):
+    logger_conf = logging.getLogger(logger_name)
+    logger_conf.addHandler(create_hand_stdout())
+    logger_conf.addHandler(create_hand_stderr())
+    if log_file_name:
+        logger_conf.addHandler(create_hand_file(log_file_name))
 
 def conf_setup_apps_logger(log_file_name: str=''):
     #logger_conf = setup_apps.logger
@@ -86,9 +94,15 @@ def create_logger(log_file_name: str=''):
 
 if __name__ == '__main__':
     log_file_name = ''
-    if True:
-        log_file_name = 'test.log'
     conf_root_logger()
+
+    conf_logger('config_test')
+    conf = Config.read_values_from_file()
+    log_to_file = conf.test_xml.log_to_file
+    #logger.debug('log_to_file: ' + str(log_to_file))
+    if log_to_file:
+        log_file_name = 'test.log'
+
     conf_setup_apps_logger(log_file_name)
     conf_app_source_handler_logger(log_file_name)
     conf_LMToyBoxPython_handler_logger(log_file_name)

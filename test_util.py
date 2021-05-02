@@ -392,8 +392,15 @@ if __name__ == '__main__':
     #logger.info('START of "test_util.py"') # 'logger' is not setup at this point
     # Always setup logger :)
     setup_root_logging()
+
+    config_logger_config_test()
+    conf = Config.read_values_from_file()
+    log_to_file = conf.test_util.log_to_file
+    logger.debug('log_to_file: ' + str(log_to_file))
+
     create_logger_local()
-    create_logger_local_to_file('spam_test_util.log')
+    if log_to_file:
+        create_logger_local_to_file('spam_test_util.log')
     logger.info('START of "test_util.py"') # No logger at this point
     
     logger.info('Init messsage test_util.py')
@@ -402,7 +409,8 @@ if __name__ == '__main__':
     # Always setup logger :)
     #setup_root_logging()
     config_logger_setup_apps()
-    config_logger_setup_apps_to_file('spam_test_util.log')
+    if log_to_file:
+        config_logger_setup_apps_to_file('spam_test_util.log')
 
     config_logger_config_test()
     conf = Config.read_values_from_file()
