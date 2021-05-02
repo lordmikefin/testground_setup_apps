@@ -35,13 +35,15 @@ def getConfigFileContent() -> configparser.RawConfigParser:
     if not util.is_file(conffile):
         # TODO: create test.ini with default values
         temp = configparser.RawConfigParser()
-        temp.add_section('section')
-        temp.set('section', 'option', 'value')
+        #temp.add_section('section')
+        #temp.set('section', 'option', 'value')
         #logger.debug("[{}]\n".format('section_name'))
+        temp.add_section(TestXml._section)
+        temp.set(TestXml._section, TestXml.log_to_file.__name__, TestXml._log_to_file)
         with open(conffile, 'w') as configfile:
             temp.write(configfile)
             #configfile.write("[{}]\n".format('section_name'))
-        pass
+
     raiseErrorFileNotFound(conffile)
 
     logger.info('starting to read test.ini (' + str(conffile) + ')...')
@@ -103,7 +105,7 @@ class TestUtil():
 
 class TestXml():
     _section = 'test_xml.py'
-    log_to_file = False
+    _log_to_file = False
     #log_to_file = isTrue(_section, 'log_to_file', default=False)
 
     def log_to_file(self):
