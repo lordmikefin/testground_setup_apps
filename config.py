@@ -27,15 +27,16 @@ def getConfigFileContent() -> configparser.RawConfigParser:
         return _CONFIGFILE
 
     _CONFIGFILE = configparser.RawConfigParser(allow_no_value=True)
-    conffile = 'config.ini'
+    conffile = 'test.ini'
     logger.error('I will try to use default config file.')
     logger.info('Config path: ' + str(conffile))
 
     raiseErrorFileNotFound(conffile)
 
-    logger.info('starting to read config.ini (' + str(conffile) + ')...')
+    logger.info('starting to read test.ini (' + str(conffile) + ')...')
 
     _CONFIGFILE.read(conffile)
+    return _CONFIGFILE
 
 def getFromConfigfile(section: str, option: str, default: str=None, reraise: bool=False,
                       must_have_value: bool=True) -> str:
@@ -54,7 +55,7 @@ def getFromConfigfile(section: str, option: str, default: str=None, reraise: boo
         return default
 
     if must_have_value and not value:
-        raise ValueError('Config.ini [' + str(section) + '] ' + \
+        raise ValueError('test.ini [' + str(section) + '] ' + \
                          str(option) + ' <-> Must have value.')
 
     return value
@@ -70,7 +71,7 @@ def toString(section: str, option: str, result, value: str, level_to_name=False)
     if level_to_name:
         level = ' [' + str(_levelToName.get(result)) + '] '
 
-    return 'config.ini:  ' + '[' + str(section) + '] ' + str(option) + ': ' + \
+    return 'test.ini:  ' + '[' + str(section) + '] ' + str(option) + ': ' + \
         str(result) + level + ' (' + str(value) + ')'
 
 def isTrue(section: str, option: str, default: bool=False) -> bool:
@@ -120,4 +121,5 @@ class Config(object):
         #Config.TestXml.log_to_file()
         conf = Config()
         conf.test_xml.log_to_file()
+        return conf
 

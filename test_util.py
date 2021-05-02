@@ -393,9 +393,10 @@ if __name__ == '__main__':
     config_logger_setup_apps()
     config_logger_setup_apps_to_file('spam_test_util.log')
 
-    #Config.read_values_from_file()
+    conf = Config.read_values_from_file()
     #test = Config.TestXml.log_to_file
-    #logger.debug('test: ' + str(test))
+    test = conf.test_xml.log_to_file
+    logger.debug('test: ' + str(test))
 
     if False:
         init_testing()
