@@ -306,7 +306,7 @@ def linux_sudo_test_alter():
         logger.info('These test are not for windows os')
         return
 
-    if not util.is_root():
+    if not util.is_root_not_sudo():
         # https://stackoverflow.com/questions/5191878/change-to-sudo-user-within-a-python-script
         #raise NotSudo("This program is not run as sudo or elevated this it will not work")
         logger.info("not root")
@@ -317,7 +317,7 @@ def linux_sudo_test_alter():
     returncode = subprocess.call(["/usr/bin/sudo", "/usr/bin/id"])
     logger.info('returncode: ' + str(returncode))
 
-    if not util.is_root():
+    if not util.is_root_not_sudo():
         logger.info("not root")
     else:
         logger.info("is root")
@@ -342,7 +342,7 @@ def linux_sudo_test_alter():
 
     logger.info("Now switch back to the calling user: " + getpass.getuser())
 
-    if not util.is_root():
+    if not util.is_root_not_sudo():
         logger.info("not root")
     else:
         logger.info("is root")
@@ -366,7 +366,7 @@ def linux_sudo_test_alter():
     #elevate()
     #elevate(graphical=False)
 
-    if not util.is_root():
+    if not util.is_root_not_sudo():
         logger.info("not root")
     else:
         logger.info("is root")

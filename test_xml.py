@@ -86,7 +86,7 @@ def create_logger(log_file_name: str=''):
 
 if __name__ == '__main__':
     log_file_name = ''
-    if False:
+    if True:
         log_file_name = 'test.log'
     conf_root_logger()
     conf_setup_apps_logger(log_file_name)
