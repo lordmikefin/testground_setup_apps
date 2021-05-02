@@ -39,8 +39,10 @@ def init_testing():
     assert sys.version_info >= (3, 7)
 
     logger.info('Test function "hint_test"')
+    # NOTE: https://stackoverflow.com/questions/2112715/how-do-i-fix-pydev-undefined-variable-from-import-errors
+    # NOTE: https://github.com/python-attrs/attrs/issues/288
     # TODO: why __annotations__ is marked as error in Eclipse?!
-    logger.info('annotations: ' + str(util.hint_test.__annotations__))
+    logger.info('annotations: ' + str(util.hint_test.__annotations__))  # @UndefinedVariable
     #print('' + str(typing.get_type_hints(util.hint_test)))
     #print('' + str(hint_test.__annotations__))
     logger.info('Call: ' + "hint_test('test')")
@@ -51,7 +53,7 @@ def init_testing():
     logger.info('hint_test: ' + str(test))
 
     logger.info('Test function "hint_test_complex"')
-    logger.info('annotations: ' + str(util.hint_test_complex.__annotations__))
+    logger.info('annotations: ' + str(util.hint_test_complex.__annotations__))  # @UndefinedVariable
     logger.info('Call: ' + "hint_test_complex('test')")
     test = util.hint_test_complex('test')
     logger.info('hint_test_complex: ' + str(test))
