@@ -8,6 +8,9 @@ Created on 2 May 2021
 '''
 
 import configparser
+import logging
+
+logger = logging.getLogger('config_test')
 
 class Config(object):
     '''
