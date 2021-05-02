@@ -12,6 +12,7 @@ import os
 from LMToyBoxPython import LMhashlib
 import inspect
 from setup_apps.namedtuples import CommandRet
+#from config import Config
 #from setup_apps.util import hint_test
 '''
 def hint_test(test: str) -> bool:
@@ -392,6 +393,9 @@ if __name__ == '__main__':
     config_logger_setup_apps()
     config_logger_setup_apps_to_file('spam_test_util.log')
 
+    #test = Config.TestXml.log_to_file
+    #logger.debug('test: ' + test)
+
     if False:
         init_testing()
     if False:
@@ -400,7 +404,7 @@ if __name__ == '__main__':
         logging_testing()
     if False:
         win_only_test()
-    if True:
+    if False:
         linux_sudo_test()
         #linux_sudo_test_alter()
 
