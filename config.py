@@ -32,17 +32,7 @@ def getConfigFileContent() -> configparser.RawConfigParser:
     logger.info('Config path: ' + str(conffile))
 
     if not util.is_file(conffile):
-        logger.info('I will try to create default config file.')
-        # TODO: create test.ini with default values
-        temp = configparser.RawConfigParser()
-        #temp.add_section('section')
-        #temp.set('section', 'option', 'value')
-        #logger.debug("[{}]\n".format('section_name'))
-        temp.add_section(TestXml._section)
-        temp.set(TestXml._section, TestXml.log_to_file.__name__, TestXml._log_to_file)
-        with open(conffile, 'w') as configfile:
-            temp.write(configfile)
-            #configfile.write("[{}]\n".format('section_name'))
+        Config.write_ini_file(conffile)
 
     raiseErrorFileNotFound(conffile)
 
@@ -99,13 +89,16 @@ class TestUtil():
     _log_to_file = False
     _log_file_name = 'spam_test_util.log'
 
-    def __init__(self, params=None):
+    def __init__(self):
         '''
         Constructor
         '''
+        self._log_to_file = None
 
     def log_to_file(self):
-        self.log_to_file = isTrue(self._section, 'log_to_file', default=False)
+        if self._log_to_file is None:
+            self._log_to_file = isTrue(self._section, 'log_to_file', default=False)
+        return self._log_to_file
 
 
 class TestXml():
@@ -113,8 +106,16 @@ class TestXml():
     _log_to_file = False
     #log_to_file = isTrue(_section, 'log_to_file', default=False)
 
+    def __init__(self):
+        '''
+        Constructor
+        '''
+        self._log_to_file = None
+
     def log_to_file(self):
-        self.log_to_file = isTrue(self._section, 'log_to_file', default=False)
+        if self._log_to_file is None:
+            self._log_to_file = isTrue(self._section, 'log_to_file', default=False)
+        return self._log_to_file
 
 
 class Config(object):
@@ -140,6 +141,20 @@ class Config(object):
         return conf
 
     @staticmethod
-    def write_ini_file():
-        pass
+    def write_ini_file(conffile):
+        logger.info('I will try to create default config file.')
+        # TODO: create test.ini with default values
+        temp = configparser.RawConfigParser()
+        #temp.add_section('section')
+        #temp.set('section', 'option', 'value')
+        #logger.debug("[{}]\n".format('section_name'))
+        temp.add_section(TestUtil._section)
+        temp.set(TestUtil._section, TestUtil.log_to_file.__name__, TestUtil._log_to_file)
+
+        temp.add_section(TestXml._section)
+        temp.set(TestXml._section, TestXml.log_to_file.__name__, TestXml._log_to_file)
+
+        with open(conffile, 'w') as configfile:
+            temp.write(configfile)
+            #configfile.write("[{}]\n".format('section_name'))
 
