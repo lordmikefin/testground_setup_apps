@@ -395,7 +395,7 @@ if __name__ == '__main__':
 
     config_logger_config_test()
     conf = Config.read_values_from_file()
-    log_to_file = conf.test_util.log_to_file
+    log_to_file = conf.test_util.log_to_file()
     logger.debug('log_to_file: ' + str(log_to_file))
 
     create_logger_local()

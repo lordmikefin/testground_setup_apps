@@ -98,7 +98,7 @@ if __name__ == '__main__':
 
     conf_logger('config_test')
     conf = Config.read_values_from_file()
-    log_to_file = conf.test_xml.log_to_file
+    log_to_file = conf.test_xml.log_to_file()
     #logger.debug('log_to_file: ' + str(log_to_file))
     if log_to_file:
         log_file_name = 'test.log'
