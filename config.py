@@ -14,6 +14,7 @@ from logging import _levelToName
 from setup_apps import util
 
 logger = logging.getLogger('config_test')
+logger.propagate = False  # Do not propagate the log up to parent
 _CONFIGFILE = None
 
 def raiseErrorFileNotFound(file: str):# -> NoReturn:
@@ -31,6 +32,9 @@ def getConfigFileContent() -> configparser.RawConfigParser:
     logger.error('I will try to use default config file.')
     logger.info('Config path: ' + str(conffile))
 
+    if not util.is_file(conffile):
+        # TODO: create test.ini with default values
+        pass
     raiseErrorFileNotFound(conffile)
 
     logger.info('starting to read test.ini (' + str(conffile) + ')...')

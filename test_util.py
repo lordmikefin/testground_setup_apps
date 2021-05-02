@@ -253,6 +253,17 @@ def create_logger_local_to_file(log_file_name: str):
     fh.setFormatter(formatter)
     logger_test.addHandler(fh)
 
+def config_logger_config_test():
+    """ logger for config.py/ read test.ini """
+    logger.info(' ===  ' + str(inspect.currentframe().f_code.co_name) + '  === ')
+    logger.info('Conf the "config_test" at test_util')
+    log = logging.getLogger('config_test')
+    formatter = logging.Formatter('%(name)s - %(levelname)-5s - %(message)s [%(pathname)s:%(lineno)d]')
+    ch = logging.StreamHandler(stream=sys.stdout)
+    ch.setLevel(logging.DEBUG)
+    ch.setFormatter(formatter)
+    log.addHandler(ch)
+
 def config_logger_setup_apps():
     logger.info(' ===  ' + str(inspect.currentframe().f_code.co_name) + '  === ')
     logger.info('Conf the "setup_apps" at test_util')
@@ -393,6 +404,7 @@ if __name__ == '__main__':
     config_logger_setup_apps()
     config_logger_setup_apps_to_file('spam_test_util.log')
 
+    config_logger_config_test()
     conf = Config.read_values_from_file()
     #test = Config.TestXml.log_to_file
     test = conf.test_xml.log_to_file
