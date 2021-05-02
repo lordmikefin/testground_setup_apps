@@ -82,21 +82,42 @@ def isTrue(section: str, option: str, default: bool=False) -> bool:
     return result
 
 
-class Config(object):
-    '''
-    classdocs
-    '''
+class TestUtil():
+    _section = 'test_util.py'
 
-
-    def __init__(self, params):
+    def __init__(self, params=None):
         '''
         Constructor
         '''
 
-    class TestUtil():
-        _section = 'test_util.py'
 
-    class TestXml():
-        _section = 'test_xml.py'
-        log_to_file = False
-        #log_to_file = isTrue(_section, 'log_to_file', default=False)
+class TestXml():
+    _section = 'test_xml.py'
+    log_to_file = False
+    #log_to_file = isTrue(_section, 'log_to_file', default=False)
+
+    def log_to_file(self):
+        self.log_to_file = isTrue(self._section, 'log_to_file', default=False)
+
+
+class Config(object):
+    '''
+    classdocs
+    '''
+    #test_util = TestUtil()
+    #test_xml = TestXml()
+
+    def __init__(self):
+        '''
+        Constructor
+        '''
+        self.test_util = TestUtil()
+        self.test_xml = TestXml()
+
+    @staticmethod
+    def read_values_from_file():
+        #Config.TestXml.log_to_file = isTrue(_section, 'log_to_file', default=False)
+        #Config.TestXml.log_to_file()
+        conf = Config()
+        conf.test_xml.log_to_file()
+
