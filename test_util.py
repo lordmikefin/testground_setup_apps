@@ -396,13 +396,21 @@ if __name__ == '__main__':
     config_logger_config_test()
     conf = Config.read_values_from_file()
     log_to_file = conf.test_util.log_to_file()
-    logger.debug('log_to_file: ' + str(log_to_file))
+    log_file_name = conf.test_util.log_file_name()
+    run_init_testing = conf.test_util.init_testing()
+    run_run_command_testing = conf.test_util.run_command_testing()
+    run_logging_testing = conf.test_util.logging_testing()
+    run_win_only_test = conf.test_util.win_only_test()
+    run_linux_sudo_test = conf.test_util.linux_sudo_test()
 
     create_logger_local()
     if log_to_file:
-        create_logger_local_to_file('spam_test_util.log')
+        create_logger_local_to_file(log_file_name)
     logger.info('START of "test_util.py"') # No logger at this point
-    
+
+    logger.debug('log_to_file: ' + str(log_to_file))
+    logger.debug('log_file_name: ' + str(log_file_name))
+
     logger.info('Init messsage test_util.py')
     logger.info('setup_apps.revision: ' + str(setup_apps.__revision__))
 
@@ -410,7 +418,7 @@ if __name__ == '__main__':
     #setup_root_logging()
     config_logger_setup_apps()
     if log_to_file:
-        config_logger_setup_apps_to_file('spam_test_util.log')
+        config_logger_setup_apps_to_file(log_file_name)
 
     config_logger_config_test()
     conf = Config.read_values_from_file()
@@ -418,15 +426,15 @@ if __name__ == '__main__':
     test = conf.test_xml.log_to_file
     logger.debug('test: ' + str(test))
 
-    if False:
+    if run_init_testing:
         init_testing()
-    if False:
+    if run_run_command_testing:
         run_command_testing()
-    if False:
+    if run_logging_testing:
         logging_testing()
-    if False:
+    if run_win_only_test:
         win_only_test()
-    if False:
+    if run_linux_sudo_test:
         linux_sudo_test()
         #linux_sudo_test_alter()
 
