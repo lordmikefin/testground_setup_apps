@@ -162,6 +162,7 @@ class TestXml():
     _section = 'test_xml.py'
     _log_to_file = False
     #log_to_file = isTrue(_section, 'log_to_file', default=False)
+    _log_file_name = 'test_xml.log'
     _create_sample = False
     _parse = False
     _init = False
@@ -185,6 +186,11 @@ class TestXml():
         if self._log_to_file is None:
             self._log_to_file = isTrue(self._section, 'log_to_file', default=False)
         return self._log_to_file
+
+    def log_file_name(self):
+        if self._log_file_name is None:
+            self._log_file_name = getStr(self._section, 'log_file_name', default=TestXml._log_file_name)
+        return self._log_file_name
 
     def create_sample(self):
         if self._create_sample is None:
@@ -258,6 +264,13 @@ class Config(object):
 
         temp.add_section(TestXml._section)
         temp.set(TestXml._section, TestXml.log_to_file.__name__, TestXml._log_to_file)
+        temp.set(TestXml._section, TestXml.log_file_name.__name__, TestXml._log_file_name)
+        temp.set(TestXml._section, TestXml.create_sample.__name__, TestXml._create_sample)
+        temp.set(TestXml._section, TestXml.parse.__name__, TestXml._parse)
+        temp.set(TestXml._section, TestXml.init.__name__, TestXml._init)
+        temp.set(TestXml._section, TestXml.download.__name__, TestXml._download)
+        temp.set(TestXml._section, TestXml.install.__name__, TestXml._install)
+        temp.set(TestXml._section, TestXml.configure.__name__, TestXml._configure)
 
         with open(conffile, 'w') as configfile:
             temp.write(configfile)

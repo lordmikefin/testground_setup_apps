@@ -101,7 +101,13 @@ if __name__ == '__main__':
     log_to_file = conf.test_xml.log_to_file()
     #logger.debug('log_to_file: ' + str(log_to_file))
     if log_to_file:
-        log_file_name = 'test.log'
+        log_file_name = conf.test_xml.log_file_name()
+    run_create_sample = conf.test_xml.create_sample()
+    run_parse = conf.test_xml.parse()
+    run_init = conf.test_xml.init()
+    run_download = conf.test_xml.download()
+    run_install = conf.test_xml.install()
+    run_configure = conf.test_xml.configure()
 
     conf_setup_apps_logger(log_file_name)
     conf_app_source_handler_logger(log_file_name)
@@ -125,20 +131,20 @@ if __name__ == '__main__':
         #app_source_handler.source.parse(util.fix_path(SOURCE_PATH + '/' + SOURCE_FILE))
         #source_file = util.fix_path(SOURCE_PATH + '/' + SOURCE_FILE)
 
-        if True:
+        if run_create_sample:
             setup_apps.config.create_sample(overwrite=False)
         setup_apps.config.print_sample()
         #setup_apps.config.parse(source_file)
         #print('APPS: ' + json.dumps(app_source_handler.source.APPS, sort_keys=True, indent=2))
-        if True:
+        if run_parse:
             setup_apps.config.parse()
-        if True:
+        if run_init:
             setup_apps.config.init()
-        if True:
+        if run_download:
             setup_apps.config.download()
-        if True:
+        if run_install:
             setup_apps.config.install()
-        if False:
+        if run_configure:
             setup_apps.config.configure()
     #except Exception as err:
     #    logger.error(err)
