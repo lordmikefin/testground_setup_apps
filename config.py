@@ -164,6 +164,7 @@ class TestXml():
     #log_to_file = isTrue(_section, 'log_to_file', default=False)
     _log_file_name = 'test_xml.log'
     _create_sample = False
+    _overwrite_sample = False
     _parse = False
     _init = False
     _download = False
@@ -176,6 +177,7 @@ class TestXml():
         '''
         self._log_to_file = None
         self._create_sample = None
+        self._overwrite_sample = None
         self._parse = None
         self._init = None
         self._download = None
@@ -196,6 +198,11 @@ class TestXml():
         if self._create_sample is None:
             self._create_sample = isTrue(self._section, 'create_sample', default=False)
         return self._create_sample
+
+    def overwrite_sample(self):
+        if self._overwrite_sample is None:
+            self._overwrite_sample = isTrue(self._section, 'overwrite_sample', default=False)
+        return self._overwrite_sample
 
     def parse(self):
         if self._parse is None:
@@ -266,6 +273,7 @@ class Config(object):
         temp.set(TestXml._section, TestXml.log_to_file.__name__, TestXml._log_to_file)
         temp.set(TestXml._section, TestXml.log_file_name.__name__, TestXml._log_file_name)
         temp.set(TestXml._section, TestXml.create_sample.__name__, TestXml._create_sample)
+        temp.set(TestXml._section, TestXml.overwrite_sample.__name__, TestXml._overwrite_sample)
         temp.set(TestXml._section, TestXml.parse.__name__, TestXml._parse)
         temp.set(TestXml._section, TestXml.init.__name__, TestXml._init)
         temp.set(TestXml._section, TestXml.download.__name__, TestXml._download)

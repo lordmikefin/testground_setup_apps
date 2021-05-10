@@ -103,6 +103,7 @@ if __name__ == '__main__':
     if log_to_file:
         log_file_name = conf.test_xml.log_file_name()
     run_create_sample = conf.test_xml.create_sample()
+    overwrite_sample = conf.test_xml.overwrite_sample()
     run_parse = conf.test_xml.parse()
     run_init = conf.test_xml.init()
     run_download = conf.test_xml.download()
@@ -132,7 +133,7 @@ if __name__ == '__main__':
         #source_file = util.fix_path(SOURCE_PATH + '/' + SOURCE_FILE)
 
         if run_create_sample:
-            setup_apps.config.create_sample(overwrite=False)
+            setup_apps.config.create_sample(overwrite=overwrite_sample)
         setup_apps.config.print_sample()
         #setup_apps.config.parse(source_file)
         #print('APPS: ' + json.dumps(app_source_handler.source.APPS, sort_keys=True, indent=2))
