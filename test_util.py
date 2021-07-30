@@ -72,6 +72,10 @@ def init_testing():
     test = util.is_os_linux()
     logger.info('This system is linux: ' + str(test))
 
+    logger.info('Test function "is_os_freebsd12"')
+    test = util.is_os_freebsd12()
+    logger.info('This system is freebsd12: ' + str(test))
+    
     logger.info('Test function "pause"')
     util.pause()
 
@@ -155,6 +159,11 @@ def run_command_testing():
     if util.is_os_windows(): 
         test = util.run_command('echo "TEST"')
     elif util.is_os_linux():
+        logger.error('TODO: why this test will halt forever?')
+        #test = util.run_command('echo "TEST"')
+        logger.error('But when modified test will work ?!')
+        test = util.run_command('echo "TEST"', shell=True)
+    elif util.is_os_freebsd12():
         logger.error('TODO: why this test will halt forever?')
         #test = util.run_command('echo "TEST"')
         logger.error('But when modified test will work ?!')
