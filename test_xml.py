@@ -138,6 +138,7 @@ if __name__ == '__main__':
         #setup_apps.config.parse(source_file)
         #print('APPS: ' + json.dumps(app_source_handler.source.APPS, sort_keys=True, indent=2))
         if run_parse:
+            # TODO: What we should do when config xml file does not exist?
             setup_apps.config.parse()
         if run_init:
             setup_apps.config.init()
